@@ -1,11 +1,12 @@
 param(
     [string]$CodexSessionsPath = "$HOME\.codex\sessions",
+    [string]$StateDbPath = "$HOME\.codex\state_5.sqlite",
     [string]$OutputPath = "assets\codex-activity.svg",
-    [string]$Lifetime = "5.91B",
-    [string]$Peak = "353M",
-    [string]$Streak = "2d",
-    [string]$BestStreak = "49d",
-    [string]$LongestTask = "5h 12m"
+    [string]$Lifetime = "",
+    [string]$Peak = "",
+    [string]$Streak = "",
+    [string]$BestStreak = "",
+    [string]$LongestTask = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -32,7 +33,7 @@ function Get-SessionDate($File) {
     return $File.LastWriteTime.Date
 }
 
-function Get-Level([int]$Count, [int]$MaxCount) {
+function Get-Level([Int64]$Count, [Int64]$MaxCount) {
     if ($Count -le 0) {
         return 0
     }
@@ -55,39 +56,205 @@ function Get-Level([int]$Count, [int]$MaxCount) {
     return 4
 }
 
+function Format-CompactNumber([Int64]$Value) {
+    if ($Value -ge 1000000000) {
+        return ("{0:N2}B" -f ($Value / 1000000000.0)).TrimEnd("0").TrimEnd(".")
+    }
+    if ($Value -ge 1000000) {
+        return ("{0:N1}M" -f ($Value / 1000000.0)).TrimEnd("0").TrimEnd(".")
+    }
+    if ($Value -ge 1000) {
+        return ("{0:N1}K" -f ($Value / 1000.0)).TrimEnd("0").TrimEnd(".")
+    }
+
+    return "$Value"
+}
+
+function Format-Duration([Int64]$Seconds) {
+    if ($Seconds -le 0) {
+        return "0m"
+    }
+
+    $span = [TimeSpan]::FromSeconds($Seconds)
+    $hours = [int][math]::Floor($span.TotalHours)
+    if ($hours -gt 0) {
+        return "${hours}h $($span.Minutes)m"
+    }
+
+    return "$($span.Minutes)m"
+}
+
+function Get-ActualTokenUsage($StateDbPath, [datetime]$Start, [datetime]$End) {
+    if (-not (Test-Path -LiteralPath $StateDbPath)) {
+        return $null
+    }
+
+    $sqlite = Get-Command sqlite3 -ErrorAction SilentlyContinue
+    if ($null -eq $sqlite) {
+        return $null
+    }
+
+    try {
+        $dailySql = @"
+select date(created_at,'unixepoch','localtime') as d,
+       coalesce(sum(tokens_used), 0) as tokens,
+       count(*) as threads
+from threads
+where tokens_used > 0
+group by d
+order by d;
+"@
+        $dailyRows = @(sqlite3 -separator "|" $StateDbPath $dailySql)
+        $summary = (sqlite3 -separator "|" $StateDbPath "select coalesce(sum(tokens_used),0), coalesce(max(tokens_used),0), count(*) from threads where tokens_used > 0;")
+        $longestSeconds = [Int64](sqlite3 $StateDbPath "select coalesce(max(updated_at - created_at),0) from threads where updated_at >= created_at;")
+    }
+    catch {
+        return $null
+    }
+
+    $counts = @{}
+    $threadCounts = @{}
+    $activeDates = New-Object System.Collections.Generic.List[datetime]
+    $maxDayTokens = [Int64]0
+
+    foreach ($row in $dailyRows) {
+        if ([string]::IsNullOrWhiteSpace($row)) {
+            continue
+        }
+
+        $parts = $row -split "\|"
+        if ($parts.Count -lt 3) {
+            continue
+        }
+
+        $date = [datetime]::ParseExact($parts[0], "yyyy-MM-dd", [System.Globalization.CultureInfo]::InvariantCulture)
+        $tokens = [Int64]$parts[1]
+        $threads = [int]$parts[2]
+        if ($date -lt $Start -or $date -gt $End) {
+            continue
+        }
+
+        $key = $date.ToString("yyyy-MM-dd")
+        $counts[$key] = $tokens
+        $threadCounts[$key] = $threads
+        $activeDates.Add($date.Date)
+        if ($tokens -gt $maxDayTokens) {
+            $maxDayTokens = $tokens
+        }
+    }
+
+    $summaryParts = $summary -split "\|"
+    $totalTokens = if ($summaryParts.Count -gt 0) { [Int64]$summaryParts[0] } else { [Int64]0 }
+    $maxThreadTokens = if ($summaryParts.Count -gt 1) { [Int64]$summaryParts[1] } else { [Int64]0 }
+    $totalThreads = if ($summaryParts.Count -gt 2) { [int]$summaryParts[2] } else { 0 }
+
+    $activeSet = @{}
+    foreach ($date in $activeDates) {
+        $activeSet[$date.ToString("yyyy-MM-dd")] = $true
+    }
+
+    $currentStreak = 0
+    if ($activeDates.Count -gt 0) {
+        $cursor = ($activeDates | Sort-Object -Descending | Select-Object -First 1).Date
+        while ($activeSet.ContainsKey($cursor.ToString("yyyy-MM-dd"))) {
+            $currentStreak += 1
+            $cursor = $cursor.AddDays(-1)
+        }
+    }
+
+    $bestStreak = 0
+    $running = 0
+    $previous = $null
+    foreach ($date in ($activeDates | Sort-Object -Unique)) {
+        if ($null -ne $previous -and $date -eq $previous.AddDays(1)) {
+            $running += 1
+        }
+        else {
+            $running = 1
+        }
+        if ($running -gt $bestStreak) {
+            $bestStreak = $running
+        }
+        $previous = $date
+    }
+
+    return [pscustomobject]@{
+        Counts = $counts
+        ThreadCounts = $threadCounts
+        TotalTokens = $totalTokens
+        TotalThreads = $totalThreads
+        ActiveDays = $activeSet.Keys.Count
+        MaxDayTokens = $maxDayTokens
+        MaxThreadTokens = $maxThreadTokens
+        CurrentStreak = $currentStreak
+        BestStreak = $bestStreak
+        LongestSeconds = $longestSeconds
+        Source = "state_5.sqlite threads.tokens_used"
+    }
+}
+
 if (-not (Test-Path -LiteralPath $CodexSessionsPath)) {
     throw "Codex sessions path not found: $CodexSessionsPath"
 }
 
 $files = @(Get-ChildItem -LiteralPath $CodexSessionsPath -Recurse -Filter "rollout-*.jsonl" -File)
 $today = (Get-Date).Date
-$start = $today.AddDays(-371)
-$start = $start.AddDays(-1 * [int]$start.DayOfWeek)
-$end = $start.AddDays((53 * 7) - 1)
+$end = $today.AddDays(6 - [int]$today.DayOfWeek)
+$start = $end.AddDays(-370)
 
+$usage = Get-ActualTokenUsage $StateDbPath $start $end
 $counts = @{}
-foreach ($file in $files) {
-    $date = Get-SessionDate $file
-    if ($date -lt $start -or $date -gt $end) {
-        continue
+$threadCounts = @{}
+$totalThreads = 0
+$activeDays = 0
+$lifetimeLabel = $Lifetime
+$peakLabel = $Peak
+$streakLabel = $Streak
+$bestStreakLabel = $BestStreak
+$longestTaskLabel = $LongestTask
+$activityUnit = "tokens"
+
+if ($null -ne $usage -and $usage.TotalTokens -gt 0) {
+    $counts = $usage.Counts
+    $threadCounts = $usage.ThreadCounts
+    $totalThreads = $usage.TotalThreads
+    $activeDays = $usage.ActiveDays
+    if ([string]::IsNullOrWhiteSpace($lifetimeLabel)) { $lifetimeLabel = Format-CompactNumber $usage.TotalTokens }
+    if ([string]::IsNullOrWhiteSpace($peakLabel)) { $peakLabel = Format-CompactNumber $usage.MaxDayTokens }
+    if ([string]::IsNullOrWhiteSpace($streakLabel)) { $streakLabel = "$($usage.CurrentStreak)d" }
+    if ([string]::IsNullOrWhiteSpace($bestStreakLabel)) { $bestStreakLabel = "$($usage.BestStreak)d" }
+    if ([string]::IsNullOrWhiteSpace($longestTaskLabel)) { $longestTaskLabel = Format-Duration $usage.LongestSeconds }
+}
+else {
+    $activityUnit = "sessions"
+    foreach ($file in $files) {
+        $date = Get-SessionDate $file
+        if ($date -lt $start -or $date -gt $end) {
+            continue
+        }
+
+        $key = $date.ToString("yyyy-MM-dd")
+        if (-not $counts.ContainsKey($key)) {
+            $counts[$key] = 0
+        }
+        $counts[$key] += 1
     }
 
-    $key = $date.ToString("yyyy-MM-dd")
-    if (-not $counts.ContainsKey($key)) {
-        $counts[$key] = 0
-    }
-    $counts[$key] += 1
+    $totalThreads = $files.Count
+    $activeDays = $counts.Keys.Count
+    if ([string]::IsNullOrWhiteSpace($lifetimeLabel)) { $lifetimeLabel = "$totalThreads" }
+    if ([string]::IsNullOrWhiteSpace($peakLabel)) { $peakLabel = "$(($counts.Values | Measure-Object -Maximum).Maximum)" }
+    if ([string]::IsNullOrWhiteSpace($streakLabel)) { $streakLabel = "n/a" }
+    if ([string]::IsNullOrWhiteSpace($bestStreakLabel)) { $bestStreakLabel = "n/a" }
+    if ([string]::IsNullOrWhiteSpace($longestTaskLabel)) { $longestTaskLabel = "n/a" }
 }
 
-$maxCount = 0
+$maxCount = [Int64]0
 foreach ($value in $counts.Values) {
     if ($value -gt $maxCount) {
         $maxCount = $value
     }
 }
-
-$totalSessions = $files.Count
-$activeDays = $counts.Keys.Count
 
 $cell = 9
 $gap = 3
@@ -101,7 +268,7 @@ $colors = @("#0e1117", "#17345f", "#225ea8", "#3b82f6", "#8bbcff")
 $svg = New-Object System.Collections.Generic.List[string]
 $svg.Add("<svg xmlns=`"http://www.w3.org/2000/svg`" width=`"$width`" height=`"$height`" viewBox=`"0 0 $width $height`" role=`"img`" aria-labelledby=`"title desc`">")
 $svg.Add("  <title id=`"title`">Codex profile activity</title>")
-$svg.Add("  <desc id=`"desc`">Codex-style profile activity card generated from local session counts.</desc>")
+$svg.Add("  <desc id=`"desc`">Codex-style profile activity card generated from local token usage.</desc>")
 $svg.Add("  <defs>")
 $svg.Add("    <linearGradient id=`"shell`" x1=`"0`" y1=`"0`" x2=`"1`" y2=`"1`">")
 $svg.Add("      <stop offset=`"0%`" stop-color=`"#3b22d8`"/>")
@@ -140,7 +307,7 @@ $svg.Add("  <text class=`"small ui`" x=`"500`" y=`"151`" text-anchor=`"middle`">
 $metricY = 187
 $labelY = 204
 $metricXs = @(294, 397, 500, 603, 706)
-$metricValues = @($Lifetime, $Peak, $LongestTask, $Streak, $BestStreak)
+$metricValues = @($lifetimeLabel, $peakLabel, $longestTaskLabel, $streakLabel, $bestStreakLabel)
 $metricLabels = @("Lifetime tokens", "Peak tokens", "Longest task", "Current streak", "Longest streak")
 for ($i = 0; $i -lt $metricXs.Count; $i++) {
     if ($i -gt 0) {
@@ -177,7 +344,14 @@ for ($week = 0; $week -lt 53; $week++) {
         $x = $left + ($week * ($cell + $gap))
         $y = $top + ($day * ($cell + $gap))
         $color = $colors[$level]
-        $label = Escape-Xml "${key}: $count Codex sessions"
+        $displayCount = if ($activityUnit -eq "tokens") { Format-CompactNumber $count } else { "$count" }
+        $threadCount = if ($threadCounts.ContainsKey($key)) { [int]$threadCounts[$key] } else { 0 }
+        $label = if ($activityUnit -eq "tokens") {
+            Escape-Xml "${key}: $displayCount tokens across $threadCount threads"
+        }
+        else {
+            Escape-Xml "${key}: $count Codex sessions"
+        }
         if ($level -eq 0) {
             $svg.Add("  <rect class=`"day`" x=`"$x`" y=`"$y`" width=`"$cell`" height=`"$cell`" rx=`"2`" fill=`"$inactive`" opacity=`"0.72`"><title>$label</title></rect>")
         }

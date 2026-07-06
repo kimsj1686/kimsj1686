@@ -2,6 +2,8 @@
 
 ![Codex 사용 현황](assets/codex-activity.svg)
 
+이 이미지는 로컬 Codex 인덱스의 `threads.tokens_used` 값을 기준으로 생성합니다. 원본 대화 내용이나 인증 정보는 공개하지 않습니다.
+
 수동 업데이트:
 
 ```powershell

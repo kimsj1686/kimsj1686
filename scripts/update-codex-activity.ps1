@@ -1,7 +1,11 @@
 param(
     [string]$CodexSessionsPath = "$HOME\.codex\sessions",
     [string]$OutputPath = "assets\codex-activity.svg",
-    [string]$HeadlineUsage = ""
+    [string]$Lifetime = "5.91B",
+    [string]$Peak = "353M",
+    [string]$Streak = "2d",
+    [string]$BestStreak = "49d",
+    [string]$LongestTask = "5h 12m"
 )
 
 $ErrorActionPreference = "Stop"
@@ -26,48 +30,6 @@ function Get-SessionDate($File) {
     }
 
     return $File.LastWriteTime.Date
-}
-
-function Get-LatestRateLimit($Files) {
-    foreach ($file in ($Files | Sort-Object LastWriteTime -Descending)) {
-        try {
-            $reader = [System.IO.StreamReader]::new($file.FullName)
-        }
-        catch {
-            continue
-        }
-
-        try {
-            while (-not $reader.EndOfStream) {
-                $line = $reader.ReadLine()
-                if ($line -notmatch '"rate_limits"') {
-                    continue
-                }
-
-                try {
-                    $record = $line | ConvertFrom-Json
-                    $rateLimits = $record.payload.rate_limits
-                    if ($null -eq $rateLimits) {
-                        continue
-                    }
-
-                    $primary = $rateLimits.primary.used_percent
-                    $secondary = $rateLimits.secondary.used_percent
-                    if ($null -ne $primary -and $null -ne $secondary) {
-                        return "Codex usage: 5h $primary% / 7d $secondary%"
-                    }
-                }
-                catch {
-                    continue
-                }
-            }
-        }
-        finally {
-            $reader.Dispose()
-        }
-    }
-
-    return "Codex usage: local sessions"
 }
 
 function Get-Level([int]$Count, [int]$MaxCount) {
@@ -126,33 +88,51 @@ foreach ($value in $counts.Values) {
 
 $totalSessions = $files.Count
 $activeDays = $counts.Keys.Count
-$latestUsage = if ([string]::IsNullOrWhiteSpace($HeadlineUsage)) {
-    Get-LatestRateLimit $files
-}
-else {
-    $HeadlineUsage
-}
 
 $cell = 11
-$gap = 3
-$left = 26
-$top = 72
-$width = $left + (53 * ($cell + $gap)) + 24
-$height = 182
-$colors = @("#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39")
+$gap = 15
+$left = 60
+$top = 185
+$width = 1416
+$height = 358
+$inactive = "#5f6368"
+$colors = @("#0b0d0e", "#f3d98f", "#f7df9b", "#ffe9ae", "#fff0c2")
 
 $svg = New-Object System.Collections.Generic.List[string]
 $svg.Add("<svg xmlns=`"http://www.w3.org/2000/svg`" width=`"$width`" height=`"$height`" viewBox=`"0 0 $width $height`" role=`"img`" aria-labelledby=`"title desc`">")
-$svg.Add("  <title id=`"title`">Codex activity</title>")
-$svg.Add("  <desc id=`"desc`">Daily Codex session activity generated from local session counts.</desc>")
+$svg.Add("  <title id=`"title`">Codex usage daily</title>")
+$svg.Add("  <desc id=`"desc`">Terminal-style daily Codex activity for the last 12 months, generated from local session counts.</desc>")
 $svg.Add("  <style>")
-$svg.Add("    .title { font: 600 16px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif; fill: #24292f; }")
-$svg.Add("    .meta { font: 12px -apple-system,BlinkMacSystemFont,Segoe UI,sans-serif; fill: #57606a; }")
-$svg.Add("    .day { shape-rendering: geometricPrecision; }")
+$svg.Add("    .term { font-family: ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; }")
+$svg.Add("    .cmd { font: 700 20px ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; fill: #b026d9; }")
+$svg.Add("    .label { font: 700 22px ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; fill: #f4f4f4; }")
+$svg.Add("    .muted { fill: #a3a8bf; }")
+$svg.Add("    .accent { fill: #ffb17a; }")
+$svg.Add("    .month, .dow { font: 20px ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; fill: #a3a8bf; }")
+$svg.Add("    .day { shape-rendering: crispEdges; }")
 $svg.Add("  </style>")
-$svg.Add("  <rect width=`"100%`" height=`"100%`" rx=`"8`" fill=`"#ffffff`"/>")
-$svg.Add("  <text class=`"title`" x=`"20`" y=`"28`">Codex Activity</text>")
-$svg.Add("  <text class=`"meta`" x=`"20`" y=`"48`">$(Escape-Xml "$totalSessions sessions - $activeDays active days - $latestUsage")</text>")
+$svg.Add("  <rect width=`"100%`" height=`"100%`" fill=`"#0b0d0e`"/>")
+$svg.Add("  <text class=`"cmd`" x=`"8`" y=`"43`">/usage daily</text>")
+$svg.Add("  <text class=`"label`" x=`"21`" y=`"93`">Token activity <tspan class=`"muted`" font-weight=`"400`" dx=`"26`">last 12 months</tspan></text>")
+$svg.Add("  <text class=`"label muted`" x=`"21`" y=`"119`" font-weight=`"400`">Lifetime <tspan class=`"accent`" font-weight=`"700`">$(Escape-Xml $Lifetime)</tspan> - Peak <tspan class=`"accent`" font-weight=`"700`">$(Escape-Xml $Peak)</tspan> - Streak <tspan class=`"accent`" font-weight=`"700`">$(Escape-Xml $Streak) (best $(Escape-Xml $BestStreak))</tspan> - Longest task <tspan class=`"accent`" font-weight=`"700`">$(Escape-Xml $LongestTask)</tspan></text>")
+
+$monthCursor = [datetime]::new($start.Year, $start.Month, 1).AddMonths(2)
+$lastMonth = [datetime]::new($today.Year, $today.Month, 1).AddMonths(-1)
+while ($monthCursor -le $lastMonth) {
+    $week = [math]::Floor(($monthCursor.Date - $start).TotalDays / 7)
+    if ($week -ge 0 -and $week -lt 53) {
+        $x = $left + ($week * ($cell + $gap))
+        $monthName = $monthCursor.ToString("MMM", [System.Globalization.CultureInfo]::InvariantCulture)
+        $svg.Add("  <text class=`"month`" x=`"$x`" y=`"168`">$monthName</text>")
+    }
+    $monthCursor = $monthCursor.AddMonths(1)
+}
+
+$days = @("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa")
+for ($day = 0; $day -lt 7; $day++) {
+    $y = $top + ($day * ($cell + $gap)) + 8
+    $svg.Add("  <text class=`"dow`" x=`"21`" y=`"$y`">$($days[$day])</text>")
+}
 
 for ($week = 0; $week -lt 53; $week++) {
     for ($day = 0; $day -lt 7; $day++) {
@@ -164,18 +144,15 @@ for ($week = 0; $week -lt 53; $week++) {
         $y = $top + ($day * ($cell + $gap))
         $color = $colors[$level]
         $label = Escape-Xml "${key}: $count Codex sessions"
-        $svg.Add("  <rect class=`"day`" x=`"$x`" y=`"$y`" width=`"$cell`" height=`"$cell`" rx=`"2`" fill=`"$color`"><title>$label</title></rect>")
+        if ($level -eq 0) {
+            $svg.Add("  <rect class=`"day`" x=`"$x`" y=`"$y`" width=`"$cell`" height=`"$cell`" fill=`"none`" stroke=`"$inactive`" stroke-width=`"1.5`"><title>$label</title></rect>")
+        }
+        else {
+            $svg.Add("  <rect class=`"day`" x=`"$x`" y=`"$y`" width=`"$cell`" height=`"$cell`" fill=`"$color`"><title>$label</title></rect>")
+        }
     }
 }
 
-$legendY = $top + (7 * ($cell + $gap)) + 16
-$svg.Add("  <text class=`"meta`" x=`"20`" y=`"$legendY`">Less</text>")
-for ($i = 0; $i -lt $colors.Count; $i++) {
-    $x = 56 + ($i * ($cell + $gap))
-    $svg.Add("  <rect x=`"$x`" y=`"$($legendY - 10)`" width=`"$cell`" height=`"$cell`" rx=`"2`" fill=`"$($colors[$i])`"/>")
-}
-$svg.Add("  <text class=`"meta`" x=`"132`" y=`"$legendY`">More</text>")
-$svg.Add("  <text class=`"meta`" x=`"$($width - 190)`" y=`"$legendY`">Updated $(Get-Date -Format 'yyyy-MM-dd HH:mm')</text>")
 $svg.Add("</svg>")
 
 $resolvedOutput = Join-Path (Get-Location) $OutputPath

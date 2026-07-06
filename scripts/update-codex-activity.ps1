@@ -89,32 +89,72 @@ foreach ($value in $counts.Values) {
 $totalSessions = $files.Count
 $activeDays = $counts.Keys.Count
 
-$cell = 11
-$gap = 15
-$left = 60
-$top = 185
-$width = 1416
-$height = 358
-$inactive = "#5f6368"
-$colors = @("#0b0d0e", "#f3d98f", "#f7df9b", "#ffe9ae", "#fff0c2")
+$cell = 9
+$gap = 3
+$left = 205
+$top = 256
+$width = 1000
+$height = 390
+$inactive = "#1a2230"
+$colors = @("#0e1117", "#17345f", "#225ea8", "#3b82f6", "#8bbcff")
 
 $svg = New-Object System.Collections.Generic.List[string]
 $svg.Add("<svg xmlns=`"http://www.w3.org/2000/svg`" width=`"$width`" height=`"$height`" viewBox=`"0 0 $width $height`" role=`"img`" aria-labelledby=`"title desc`">")
-$svg.Add("  <title id=`"title`">Codex usage daily</title>")
-$svg.Add("  <desc id=`"desc`">Terminal-style daily Codex activity for the last 12 months, generated from local session counts.</desc>")
+$svg.Add("  <title id=`"title`">Codex profile activity</title>")
+$svg.Add("  <desc id=`"desc`">Codex-style profile activity card generated from local session counts.</desc>")
+$svg.Add("  <defs>")
+$svg.Add("    <linearGradient id=`"shell`" x1=`"0`" y1=`"0`" x2=`"1`" y2=`"1`">")
+$svg.Add("      <stop offset=`"0%`" stop-color=`"#3b22d8`"/>")
+$svg.Add("      <stop offset=`"45%`" stop-color=`"#1d4ed8`"/>")
+$svg.Add("      <stop offset=`"100%`" stop-color=`"#7c3aed`"/>")
+$svg.Add("    </linearGradient>")
+$svg.Add("    <linearGradient id=`"avatar`" x1=`"0`" y1=`"0`" x2=`"1`" y2=`"1`">")
+$svg.Add("      <stop offset=`"0%`" stop-color=`"#60a5fa`"/>")
+$svg.Add("      <stop offset=`"100%`" stop-color=`"#a78bfa`"/>")
+$svg.Add("    </linearGradient>")
+$svg.Add("    <filter id=`"softShadow`" x=`"-20%`" y=`"-20%`" width=`"140%`" height=`"140%`">")
+$svg.Add("      <feDropShadow dx=`"0`" dy=`"16`" stdDeviation=`"18`" flood-color=`"#000000`" flood-opacity=`"0.35`"/>")
+$svg.Add("    </filter>")
+$svg.Add("  </defs>")
 $svg.Add("  <style>")
-$svg.Add("    .term { font-family: ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; }")
-$svg.Add("    .cmd { font: 700 20px ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; fill: #b026d9; }")
-$svg.Add("    .label { font: 700 22px ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; fill: #f4f4f4; }")
-$svg.Add("    .muted { fill: #a3a8bf; }")
-$svg.Add("    .accent { fill: #ffb17a; }")
-$svg.Add("    .month, .dow { font: 20px ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; fill: #a3a8bf; }")
-$svg.Add("    .day { shape-rendering: crispEdges; }")
+$svg.Add("    .ui { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; }")
+$svg.Add("    .mono { font-family: ui-monospace, SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace; }")
+$svg.Add("    .title { font: 600 18px Inter, ui-sans-serif, system-ui, sans-serif; fill: #f8fafc; }")
+$svg.Add("    .small { font: 500 11px Inter, ui-sans-serif, system-ui, sans-serif; fill: #778196; }")
+$svg.Add("    .metric { font: 700 15px Inter, ui-sans-serif, system-ui, sans-serif; fill: #e8edf7; }")
+$svg.Add("    .label { font: 600 11px Inter, ui-sans-serif, system-ui, sans-serif; fill: #6f7a8e; }")
+$svg.Add("    .tab { font: 600 11px Inter, ui-sans-serif, system-ui, sans-serif; fill: #6f7a8e; }")
+$svg.Add("    .activeTab { fill: #dbeafe; }")
+$svg.Add("    .month { font: 500 10px Inter, ui-sans-serif, system-ui, sans-serif; fill: #586274; }")
+$svg.Add("    .day { shape-rendering: geometricPrecision; }")
 $svg.Add("  </style>")
-$svg.Add("  <rect width=`"100%`" height=`"100%`" fill=`"#0b0d0e`"/>")
-$svg.Add("  <text class=`"cmd`" x=`"8`" y=`"43`">/usage daily</text>")
-$svg.Add("  <text class=`"label`" x=`"21`" y=`"93`">Token activity <tspan class=`"muted`" font-weight=`"400`" dx=`"26`">last 12 months</tspan></text>")
-$svg.Add("  <text class=`"label muted`" x=`"21`" y=`"119`" font-weight=`"400`">Lifetime <tspan class=`"accent`" font-weight=`"700`">$(Escape-Xml $Lifetime)</tspan> - Peak <tspan class=`"accent`" font-weight=`"700`">$(Escape-Xml $Peak)</tspan> - Streak <tspan class=`"accent`" font-weight=`"700`">$(Escape-Xml $Streak) (best $(Escape-Xml $BestStreak))</tspan> - Longest task <tspan class=`"accent`" font-weight=`"700`">$(Escape-Xml $LongestTask)</tspan></text>")
+$svg.Add("  <rect width=`"100%`" height=`"100%`" rx=`"18`" fill=`"url(#shell)`"/>")
+$svg.Add("  <rect x=`"54`" y=`"34`" width=`"892`" height=`"322`" rx=`"12`" fill=`"#0b0d0f`" stroke=`"#243044`" stroke-width=`"1`" filter=`"url(#softShadow)`"/>")
+$svg.Add("  <text class=`"small ui`" x=`"78`" y=`"61`">Profile</text>")
+$svg.Add("  <text class=`"small ui`" x=`"834`" y=`"61`">Private</text>")
+$svg.Add("  <text class=`"small ui`" x=`"896`" y=`"61`">Edit</text>")
+$svg.Add("  <circle cx=`"500`" cy=`"83`" r=`"25`" fill=`"url(#avatar)`"/>")
+$svg.Add("  <text class=`"title ui`" x=`"500`" y=`"131`" text-anchor=`"middle`">kimsj1686</text>")
+$svg.Add("  <text class=`"small ui`" x=`"500`" y=`"151`" text-anchor=`"middle`">@kimsj1686 - Codex</text>")
+
+$metricY = 187
+$labelY = 204
+$metricXs = @(294, 397, 500, 603, 706)
+$metricValues = @($Lifetime, $Peak, $LongestTask, $Streak, $BestStreak)
+$metricLabels = @("Lifetime tokens", "Peak tokens", "Longest task", "Current streak", "Longest streak")
+for ($i = 0; $i -lt $metricXs.Count; $i++) {
+    if ($i -gt 0) {
+        $lineX = $metricXs[$i] - 52
+        $svg.Add("  <line x1=`"$lineX`" y1=`"172`" x2=`"$lineX`" y2=`"207`" stroke=`"#151c28`" stroke-width=`"1`"/>")
+    }
+    $svg.Add("  <text class=`"metric ui`" x=`"$($metricXs[$i])`" y=`"$metricY`" text-anchor=`"middle`">$(Escape-Xml $metricValues[$i])</text>")
+    $svg.Add("  <text class=`"label ui`" x=`"$($metricXs[$i])`" y=`"$labelY`" text-anchor=`"middle`">$(Escape-Xml $metricLabels[$i])</text>")
+}
+
+$svg.Add("  <text class=`"label ui`" x=`"205`" y=`"245`" fill=`"#dbeafe`">Token activity</text>")
+$svg.Add("  <text class=`"tab activeTab ui`" x=`"690`" y=`"245`">Daily</text>")
+$svg.Add("  <text class=`"tab ui`" x=`"737`" y=`"245`">Weekly</text>")
+$svg.Add("  <text class=`"tab ui`" x=`"793`" y=`"245`">Cumulative</text>")
 
 $monthCursor = [datetime]::new($start.Year, $start.Month, 1).AddMonths(2)
 $lastMonth = [datetime]::new($today.Year, $today.Month, 1).AddMonths(-1)
@@ -123,15 +163,9 @@ while ($monthCursor -le $lastMonth) {
     if ($week -ge 0 -and $week -lt 53) {
         $x = $left + ($week * ($cell + $gap))
         $monthName = $monthCursor.ToString("MMM", [System.Globalization.CultureInfo]::InvariantCulture)
-        $svg.Add("  <text class=`"month`" x=`"$x`" y=`"168`">$monthName</text>")
+        $svg.Add("  <text class=`"month ui`" x=`"$x`" y=`"360`">$monthName</text>")
     }
     $monthCursor = $monthCursor.AddMonths(1)
-}
-
-$days = @("Su", "Mo", "Tu", "We", "Th", "Fr", "Sa")
-for ($day = 0; $day -lt 7; $day++) {
-    $y = $top + ($day * ($cell + $gap)) + 8
-    $svg.Add("  <text class=`"dow`" x=`"21`" y=`"$y`">$($days[$day])</text>")
 }
 
 for ($week = 0; $week -lt 53; $week++) {
@@ -145,10 +179,10 @@ for ($week = 0; $week -lt 53; $week++) {
         $color = $colors[$level]
         $label = Escape-Xml "${key}: $count Codex sessions"
         if ($level -eq 0) {
-            $svg.Add("  <rect class=`"day`" x=`"$x`" y=`"$y`" width=`"$cell`" height=`"$cell`" fill=`"none`" stroke=`"$inactive`" stroke-width=`"1.5`"><title>$label</title></rect>")
+            $svg.Add("  <rect class=`"day`" x=`"$x`" y=`"$y`" width=`"$cell`" height=`"$cell`" rx=`"2`" fill=`"$inactive`" opacity=`"0.72`"><title>$label</title></rect>")
         }
         else {
-            $svg.Add("  <rect class=`"day`" x=`"$x`" y=`"$y`" width=`"$cell`" height=`"$cell`" fill=`"$color`"><title>$label</title></rect>")
+            $svg.Add("  <rect class=`"day`" x=`"$x`" y=`"$y`" width=`"$cell`" height=`"$cell`" rx=`"2`" fill=`"$color`"><title>$label</title></rect>")
         }
     }
 }

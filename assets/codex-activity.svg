@@ -1,406 +1,438 @@
-﻿<svg xmlns="http://www.w3.org/2000/svg" width="1416" height="358" viewBox="0 0 1416 358" role="img" aria-labelledby="title desc">
-  <title id="title">Codex usage daily</title>
-  <desc id="desc">Terminal-style daily Codex activity for the last 12 months, generated from local session counts.</desc>
+﻿<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="390" viewBox="0 0 1000 390" role="img" aria-labelledby="title desc">
+  <title id="title">Codex profile activity</title>
+  <desc id="desc">Codex-style profile activity card generated from local session counts.</desc>
+  <defs>
+    <linearGradient id="shell" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b22d8"/>
+      <stop offset="45%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="avatar" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#a78bfa"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
   <style>
-    .term { font-family: ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; }
-    .cmd { font: 700 20px ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; fill: #b026d9; }
-    .label { font: 700 22px ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; fill: #f4f4f4; }
-    .muted { fill: #a3a8bf; }
-    .accent { fill: #ffb17a; }
-    .month, .dow { font: 20px ui-monospace,SFMono-Regular,Consolas,Liberation Mono,Menlo,monospace; fill: #a3a8bf; }
-    .day { shape-rendering: crispEdges; }
+    .ui { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace; }
+    .title { font: 600 18px Inter, ui-sans-serif, system-ui, sans-serif; fill: #f8fafc; }
+    .small { font: 500 11px Inter, ui-sans-serif, system-ui, sans-serif; fill: #778196; }
+    .metric { font: 700 15px Inter, ui-sans-serif, system-ui, sans-serif; fill: #e8edf7; }
+    .label { font: 600 11px Inter, ui-sans-serif, system-ui, sans-serif; fill: #6f7a8e; }
+    .tab { font: 600 11px Inter, ui-sans-serif, system-ui, sans-serif; fill: #6f7a8e; }
+    .activeTab { fill: #dbeafe; }
+    .month { font: 500 10px Inter, ui-sans-serif, system-ui, sans-serif; fill: #586274; }
+    .day { shape-rendering: geometricPrecision; }
   </style>
-  <rect width="100%" height="100%" fill="#0b0d0e"/>
-  <text class="cmd" x="8" y="43">/usage daily</text>
-  <text class="label" x="21" y="93">Token activity <tspan class="muted" font-weight="400" dx="26">last 12 months</tspan></text>
-  <text class="label muted" x="21" y="119" font-weight="400">Lifetime <tspan class="accent" font-weight="700">5.91B</tspan> - Peak <tspan class="accent" font-weight="700">353M</tspan> - Streak <tspan class="accent" font-weight="700">2d (best 49d)</tspan> - Longest task <tspan class="accent" font-weight="700">5h 12m</tspan></text>
-  <text class="month" x="164" y="168">Aug</text>
-  <text class="month" x="294" y="168">Sep</text>
-  <text class="month" x="398" y="168">Oct</text>
-  <text class="month" x="502" y="168">Nov</text>
-  <text class="month" x="632" y="168">Dec</text>
-  <text class="month" x="736" y="168">Jan</text>
-  <text class="month" x="866" y="168">Feb</text>
-  <text class="month" x="970" y="168">Mar</text>
-  <text class="month" x="1074" y="168">Apr</text>
-  <text class="month" x="1178" y="168">May</text>
-  <text class="month" x="1308" y="168">Jun</text>
-  <text class="dow" x="21" y="193">Su</text>
-  <text class="dow" x="21" y="219">Mo</text>
-  <text class="dow" x="21" y="245">Tu</text>
-  <text class="dow" x="21" y="271">We</text>
-  <text class="dow" x="21" y="297">Th</text>
-  <text class="dow" x="21" y="323">Fr</text>
-  <text class="dow" x="21" y="349">Sa</text>
-  <rect class="day" x="60" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-06-29: 0 Codex sessions</title></rect>
-  <rect class="day" x="60" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-06-30: 0 Codex sessions</title></rect>
-  <rect class="day" x="60" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="60" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-02: 0 Codex sessions</title></rect>
-  <rect class="day" x="60" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-03: 0 Codex sessions</title></rect>
-  <rect class="day" x="60" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-04: 0 Codex sessions</title></rect>
-  <rect class="day" x="60" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-05: 0 Codex sessions</title></rect>
-  <rect class="day" x="86" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-06: 0 Codex sessions</title></rect>
-  <rect class="day" x="86" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-07: 0 Codex sessions</title></rect>
-  <rect class="day" x="86" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-08: 0 Codex sessions</title></rect>
-  <rect class="day" x="86" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-09: 0 Codex sessions</title></rect>
-  <rect class="day" x="86" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-10: 0 Codex sessions</title></rect>
-  <rect class="day" x="86" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-11: 0 Codex sessions</title></rect>
-  <rect class="day" x="86" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-12: 0 Codex sessions</title></rect>
-  <rect class="day" x="112" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-13: 0 Codex sessions</title></rect>
-  <rect class="day" x="112" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-14: 0 Codex sessions</title></rect>
-  <rect class="day" x="112" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="112" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-16: 0 Codex sessions</title></rect>
-  <rect class="day" x="112" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="112" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-18: 0 Codex sessions</title></rect>
-  <rect class="day" x="112" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-19: 0 Codex sessions</title></rect>
-  <rect class="day" x="138" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="138" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="138" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="138" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="138" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="138" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="138" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-26: 0 Codex sessions</title></rect>
-  <rect class="day" x="164" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-27: 0 Codex sessions</title></rect>
-  <rect class="day" x="164" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-28: 0 Codex sessions</title></rect>
-  <rect class="day" x="164" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-29: 0 Codex sessions</title></rect>
-  <rect class="day" x="164" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-30: 0 Codex sessions</title></rect>
-  <rect class="day" x="164" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-07-31: 0 Codex sessions</title></rect>
-  <rect class="day" x="164" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="164" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-02: 0 Codex sessions</title></rect>
-  <rect class="day" x="190" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-03: 0 Codex sessions</title></rect>
-  <rect class="day" x="190" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-04: 0 Codex sessions</title></rect>
-  <rect class="day" x="190" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-05: 0 Codex sessions</title></rect>
-  <rect class="day" x="190" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-06: 0 Codex sessions</title></rect>
-  <rect class="day" x="190" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-07: 0 Codex sessions</title></rect>
-  <rect class="day" x="190" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-08: 0 Codex sessions</title></rect>
-  <rect class="day" x="190" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-09: 0 Codex sessions</title></rect>
-  <rect class="day" x="216" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-10: 0 Codex sessions</title></rect>
-  <rect class="day" x="216" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-11: 0 Codex sessions</title></rect>
-  <rect class="day" x="216" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-12: 0 Codex sessions</title></rect>
-  <rect class="day" x="216" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-13: 0 Codex sessions</title></rect>
-  <rect class="day" x="216" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-14: 0 Codex sessions</title></rect>
-  <rect class="day" x="216" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="216" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-16: 0 Codex sessions</title></rect>
-  <rect class="day" x="242" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="242" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-18: 0 Codex sessions</title></rect>
-  <rect class="day" x="242" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-19: 0 Codex sessions</title></rect>
-  <rect class="day" x="242" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="242" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="242" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="242" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="268" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="268" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="268" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-26: 0 Codex sessions</title></rect>
-  <rect class="day" x="268" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-27: 0 Codex sessions</title></rect>
-  <rect class="day" x="268" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-28: 0 Codex sessions</title></rect>
-  <rect class="day" x="268" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-29: 0 Codex sessions</title></rect>
-  <rect class="day" x="268" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-30: 0 Codex sessions</title></rect>
-  <rect class="day" x="294" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-08-31: 0 Codex sessions</title></rect>
-  <rect class="day" x="294" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="294" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-02: 0 Codex sessions</title></rect>
-  <rect class="day" x="294" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-03: 0 Codex sessions</title></rect>
-  <rect class="day" x="294" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-04: 0 Codex sessions</title></rect>
-  <rect class="day" x="294" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-05: 0 Codex sessions</title></rect>
-  <rect class="day" x="294" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-06: 0 Codex sessions</title></rect>
-  <rect class="day" x="320" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-07: 0 Codex sessions</title></rect>
-  <rect class="day" x="320" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-08: 0 Codex sessions</title></rect>
-  <rect class="day" x="320" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-09: 0 Codex sessions</title></rect>
-  <rect class="day" x="320" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-10: 0 Codex sessions</title></rect>
-  <rect class="day" x="320" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-11: 0 Codex sessions</title></rect>
-  <rect class="day" x="320" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-12: 0 Codex sessions</title></rect>
-  <rect class="day" x="320" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-13: 0 Codex sessions</title></rect>
-  <rect class="day" x="346" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-14: 0 Codex sessions</title></rect>
-  <rect class="day" x="346" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="346" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-16: 0 Codex sessions</title></rect>
-  <rect class="day" x="346" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="346" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-18: 0 Codex sessions</title></rect>
-  <rect class="day" x="346" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-19: 0 Codex sessions</title></rect>
-  <rect class="day" x="346" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="372" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="372" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="372" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="372" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="372" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="372" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-26: 0 Codex sessions</title></rect>
-  <rect class="day" x="372" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-27: 0 Codex sessions</title></rect>
-  <rect class="day" x="398" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-28: 0 Codex sessions</title></rect>
-  <rect class="day" x="398" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-29: 0 Codex sessions</title></rect>
-  <rect class="day" x="398" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-09-30: 0 Codex sessions</title></rect>
-  <rect class="day" x="398" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="398" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-02: 0 Codex sessions</title></rect>
-  <rect class="day" x="398" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-03: 0 Codex sessions</title></rect>
-  <rect class="day" x="398" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-04: 0 Codex sessions</title></rect>
-  <rect class="day" x="424" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-05: 0 Codex sessions</title></rect>
-  <rect class="day" x="424" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-06: 0 Codex sessions</title></rect>
-  <rect class="day" x="424" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-07: 0 Codex sessions</title></rect>
-  <rect class="day" x="424" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-08: 0 Codex sessions</title></rect>
-  <rect class="day" x="424" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-09: 0 Codex sessions</title></rect>
-  <rect class="day" x="424" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-10: 0 Codex sessions</title></rect>
-  <rect class="day" x="424" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-11: 0 Codex sessions</title></rect>
-  <rect class="day" x="450" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-12: 0 Codex sessions</title></rect>
-  <rect class="day" x="450" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-13: 0 Codex sessions</title></rect>
-  <rect class="day" x="450" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-14: 0 Codex sessions</title></rect>
-  <rect class="day" x="450" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="450" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-16: 0 Codex sessions</title></rect>
-  <rect class="day" x="450" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="450" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-18: 0 Codex sessions</title></rect>
-  <rect class="day" x="476" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-19: 0 Codex sessions</title></rect>
-  <rect class="day" x="476" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="476" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="476" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="476" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="476" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="476" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="502" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-26: 0 Codex sessions</title></rect>
-  <rect class="day" x="502" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-27: 0 Codex sessions</title></rect>
-  <rect class="day" x="502" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-28: 0 Codex sessions</title></rect>
-  <rect class="day" x="502" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-29: 0 Codex sessions</title></rect>
-  <rect class="day" x="502" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-30: 0 Codex sessions</title></rect>
-  <rect class="day" x="502" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-10-31: 0 Codex sessions</title></rect>
-  <rect class="day" x="502" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="528" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-02: 0 Codex sessions</title></rect>
-  <rect class="day" x="528" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-03: 0 Codex sessions</title></rect>
-  <rect class="day" x="528" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-04: 0 Codex sessions</title></rect>
-  <rect class="day" x="528" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-05: 0 Codex sessions</title></rect>
-  <rect class="day" x="528" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-06: 0 Codex sessions</title></rect>
-  <rect class="day" x="528" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-07: 0 Codex sessions</title></rect>
-  <rect class="day" x="528" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-08: 0 Codex sessions</title></rect>
-  <rect class="day" x="554" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-09: 0 Codex sessions</title></rect>
-  <rect class="day" x="554" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-10: 0 Codex sessions</title></rect>
-  <rect class="day" x="554" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-11: 0 Codex sessions</title></rect>
-  <rect class="day" x="554" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-12: 0 Codex sessions</title></rect>
-  <rect class="day" x="554" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-13: 0 Codex sessions</title></rect>
-  <rect class="day" x="554" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-14: 0 Codex sessions</title></rect>
-  <rect class="day" x="554" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="580" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-16: 0 Codex sessions</title></rect>
-  <rect class="day" x="580" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="580" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-18: 0 Codex sessions</title></rect>
-  <rect class="day" x="580" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-19: 0 Codex sessions</title></rect>
-  <rect class="day" x="580" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="580" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="580" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="606" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="606" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="606" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="606" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-26: 0 Codex sessions</title></rect>
-  <rect class="day" x="606" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-27: 0 Codex sessions</title></rect>
-  <rect class="day" x="606" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-28: 0 Codex sessions</title></rect>
-  <rect class="day" x="606" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-29: 0 Codex sessions</title></rect>
-  <rect class="day" x="632" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-11-30: 0 Codex sessions</title></rect>
-  <rect class="day" x="632" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="632" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-02: 0 Codex sessions</title></rect>
-  <rect class="day" x="632" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-03: 0 Codex sessions</title></rect>
-  <rect class="day" x="632" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-04: 0 Codex sessions</title></rect>
-  <rect class="day" x="632" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-05: 0 Codex sessions</title></rect>
-  <rect class="day" x="632" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-06: 0 Codex sessions</title></rect>
-  <rect class="day" x="658" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-07: 0 Codex sessions</title></rect>
-  <rect class="day" x="658" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-08: 0 Codex sessions</title></rect>
-  <rect class="day" x="658" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-09: 0 Codex sessions</title></rect>
-  <rect class="day" x="658" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-10: 0 Codex sessions</title></rect>
-  <rect class="day" x="658" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-11: 0 Codex sessions</title></rect>
-  <rect class="day" x="658" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-12: 0 Codex sessions</title></rect>
-  <rect class="day" x="658" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-13: 0 Codex sessions</title></rect>
-  <rect class="day" x="684" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-14: 0 Codex sessions</title></rect>
-  <rect class="day" x="684" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="684" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-16: 0 Codex sessions</title></rect>
-  <rect class="day" x="684" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="684" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-18: 0 Codex sessions</title></rect>
-  <rect class="day" x="684" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-19: 0 Codex sessions</title></rect>
-  <rect class="day" x="684" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="710" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="710" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="710" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="710" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="710" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="710" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-26: 0 Codex sessions</title></rect>
-  <rect class="day" x="710" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-27: 0 Codex sessions</title></rect>
-  <rect class="day" x="736" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-28: 0 Codex sessions</title></rect>
-  <rect class="day" x="736" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-29: 0 Codex sessions</title></rect>
-  <rect class="day" x="736" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-30: 0 Codex sessions</title></rect>
-  <rect class="day" x="736" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2025-12-31: 0 Codex sessions</title></rect>
-  <rect class="day" x="736" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="736" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-02: 0 Codex sessions</title></rect>
-  <rect class="day" x="736" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-03: 0 Codex sessions</title></rect>
-  <rect class="day" x="762" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-04: 0 Codex sessions</title></rect>
-  <rect class="day" x="762" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-05: 0 Codex sessions</title></rect>
-  <rect class="day" x="762" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-06: 0 Codex sessions</title></rect>
-  <rect class="day" x="762" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-07: 0 Codex sessions</title></rect>
-  <rect class="day" x="762" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-08: 0 Codex sessions</title></rect>
-  <rect class="day" x="762" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-09: 0 Codex sessions</title></rect>
-  <rect class="day" x="762" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-10: 0 Codex sessions</title></rect>
-  <rect class="day" x="788" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-11: 0 Codex sessions</title></rect>
-  <rect class="day" x="788" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-12: 0 Codex sessions</title></rect>
-  <rect class="day" x="788" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-13: 0 Codex sessions</title></rect>
-  <rect class="day" x="788" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-14: 0 Codex sessions</title></rect>
-  <rect class="day" x="788" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="788" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-16: 0 Codex sessions</title></rect>
-  <rect class="day" x="788" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="814" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-18: 0 Codex sessions</title></rect>
-  <rect class="day" x="814" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-19: 0 Codex sessions</title></rect>
-  <rect class="day" x="814" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="814" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="814" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="814" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="814" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="840" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="840" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-26: 0 Codex sessions</title></rect>
-  <rect class="day" x="840" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-27: 0 Codex sessions</title></rect>
-  <rect class="day" x="840" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-28: 0 Codex sessions</title></rect>
-  <rect class="day" x="840" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-29: 0 Codex sessions</title></rect>
-  <rect class="day" x="840" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-30: 0 Codex sessions</title></rect>
-  <rect class="day" x="840" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-01-31: 0 Codex sessions</title></rect>
-  <rect class="day" x="866" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="866" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-02: 0 Codex sessions</title></rect>
-  <rect class="day" x="866" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-03: 0 Codex sessions</title></rect>
-  <rect class="day" x="866" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-04: 0 Codex sessions</title></rect>
-  <rect class="day" x="866" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-05: 0 Codex sessions</title></rect>
-  <rect class="day" x="866" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-06: 0 Codex sessions</title></rect>
-  <rect class="day" x="866" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-07: 0 Codex sessions</title></rect>
-  <rect class="day" x="892" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-08: 0 Codex sessions</title></rect>
-  <rect class="day" x="892" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-09: 0 Codex sessions</title></rect>
-  <rect class="day" x="892" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-10: 0 Codex sessions</title></rect>
-  <rect class="day" x="892" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-11: 0 Codex sessions</title></rect>
-  <rect class="day" x="892" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-12: 0 Codex sessions</title></rect>
-  <rect class="day" x="892" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-13: 0 Codex sessions</title></rect>
-  <rect class="day" x="892" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-14: 0 Codex sessions</title></rect>
-  <rect class="day" x="918" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="918" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-16: 0 Codex sessions</title></rect>
-  <rect class="day" x="918" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="918" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-18: 0 Codex sessions</title></rect>
-  <rect class="day" x="918" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-19: 0 Codex sessions</title></rect>
-  <rect class="day" x="918" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="918" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="944" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="944" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="944" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="944" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="944" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-26: 0 Codex sessions</title></rect>
-  <rect class="day" x="944" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-27: 0 Codex sessions</title></rect>
-  <rect class="day" x="944" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-02-28: 0 Codex sessions</title></rect>
-  <rect class="day" x="970" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="970" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-02: 0 Codex sessions</title></rect>
-  <rect class="day" x="970" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-03: 0 Codex sessions</title></rect>
-  <rect class="day" x="970" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-04: 0 Codex sessions</title></rect>
-  <rect class="day" x="970" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-05: 0 Codex sessions</title></rect>
-  <rect class="day" x="970" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-06: 0 Codex sessions</title></rect>
-  <rect class="day" x="970" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-07: 0 Codex sessions</title></rect>
-  <rect class="day" x="996" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-08: 0 Codex sessions</title></rect>
-  <rect class="day" x="996" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-09: 0 Codex sessions</title></rect>
-  <rect class="day" x="996" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-10: 0 Codex sessions</title></rect>
-  <rect class="day" x="996" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-11: 0 Codex sessions</title></rect>
-  <rect class="day" x="996" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-12: 0 Codex sessions</title></rect>
-  <rect class="day" x="996" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-13: 0 Codex sessions</title></rect>
-  <rect class="day" x="996" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-14: 0 Codex sessions</title></rect>
-  <rect class="day" x="1022" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="1022" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-16: 0 Codex sessions</title></rect>
-  <rect class="day" x="1022" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="1022" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-18: 0 Codex sessions</title></rect>
-  <rect class="day" x="1022" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-19: 0 Codex sessions</title></rect>
-  <rect class="day" x="1022" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="1022" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="1048" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="1048" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="1048" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="1048" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="1048" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-26: 0 Codex sessions</title></rect>
-  <rect class="day" x="1048" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-27: 0 Codex sessions</title></rect>
-  <rect class="day" x="1048" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-28: 0 Codex sessions</title></rect>
-  <rect class="day" x="1074" y="185" width="11" height="11" fill="#f3d98f"><title>2026-03-29: 5 Codex sessions</title></rect>
-  <rect class="day" x="1074" y="211" width="11" height="11" fill="#f3d98f"><title>2026-03-30: 2 Codex sessions</title></rect>
-  <rect class="day" x="1074" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-03-31: 0 Codex sessions</title></rect>
-  <rect class="day" x="1074" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="1074" y="289" width="11" height="11" fill="#f3d98f"><title>2026-04-02: 1 Codex sessions</title></rect>
-  <rect class="day" x="1074" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-03: 0 Codex sessions</title></rect>
-  <rect class="day" x="1074" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-04: 0 Codex sessions</title></rect>
-  <rect class="day" x="1100" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-05: 0 Codex sessions</title></rect>
-  <rect class="day" x="1100" y="211" width="11" height="11" fill="#f3d98f"><title>2026-04-06: 7 Codex sessions</title></rect>
-  <rect class="day" x="1100" y="237" width="11" height="11" fill="#f3d98f"><title>2026-04-07: 3 Codex sessions</title></rect>
-  <rect class="day" x="1100" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-08: 0 Codex sessions</title></rect>
-  <rect class="day" x="1100" y="289" width="11" height="11" fill="#f3d98f"><title>2026-04-09: 6 Codex sessions</title></rect>
-  <rect class="day" x="1100" y="315" width="11" height="11" fill="#f7df9b"><title>2026-04-10: 14 Codex sessions</title></rect>
-  <rect class="day" x="1100" y="341" width="11" height="11" fill="#ffe9ae"><title>2026-04-11: 25 Codex sessions</title></rect>
-  <rect class="day" x="1126" y="185" width="11" height="11" fill="#ffe9ae"><title>2026-04-12: 25 Codex sessions</title></rect>
-  <rect class="day" x="1126" y="211" width="11" height="11" fill="#ffe9ae"><title>2026-04-13: 20 Codex sessions</title></rect>
-  <rect class="day" x="1126" y="237" width="11" height="11" fill="#f3d98f"><title>2026-04-14: 4 Codex sessions</title></rect>
-  <rect class="day" x="1126" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="1126" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-16: 0 Codex sessions</title></rect>
-  <rect class="day" x="1126" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="1126" y="341" width="11" height="11" fill="#f3d98f"><title>2026-04-18: 4 Codex sessions</title></rect>
-  <rect class="day" x="1152" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-19: 0 Codex sessions</title></rect>
-  <rect class="day" x="1152" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="1152" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="1152" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="1152" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="1152" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="1152" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="1178" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-26: 0 Codex sessions</title></rect>
-  <rect class="day" x="1178" y="211" width="11" height="11" fill="#f3d98f"><title>2026-04-27: 5 Codex sessions</title></rect>
-  <rect class="day" x="1178" y="237" width="11" height="11" fill="#f3d98f"><title>2026-04-28: 3 Codex sessions</title></rect>
-  <rect class="day" x="1178" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-29: 0 Codex sessions</title></rect>
-  <rect class="day" x="1178" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-04-30: 0 Codex sessions</title></rect>
-  <rect class="day" x="1178" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="1178" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-02: 0 Codex sessions</title></rect>
-  <rect class="day" x="1204" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-03: 0 Codex sessions</title></rect>
-  <rect class="day" x="1204" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-04: 0 Codex sessions</title></rect>
-  <rect class="day" x="1204" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-05: 0 Codex sessions</title></rect>
-  <rect class="day" x="1204" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-06: 0 Codex sessions</title></rect>
-  <rect class="day" x="1204" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-07: 0 Codex sessions</title></rect>
-  <rect class="day" x="1204" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-08: 0 Codex sessions</title></rect>
-  <rect class="day" x="1204" y="341" width="11" height="11" fill="#f3d98f"><title>2026-05-09: 1 Codex sessions</title></rect>
-  <rect class="day" x="1230" y="185" width="11" height="11" fill="#f3d98f"><title>2026-05-10: 3 Codex sessions</title></rect>
-  <rect class="day" x="1230" y="211" width="11" height="11" fill="#f7df9b"><title>2026-05-11: 10 Codex sessions</title></rect>
-  <rect class="day" x="1230" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-12: 0 Codex sessions</title></rect>
-  <rect class="day" x="1230" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-13: 0 Codex sessions</title></rect>
-  <rect class="day" x="1230" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-14: 0 Codex sessions</title></rect>
-  <rect class="day" x="1230" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="1230" y="341" width="11" height="11" fill="#f3d98f"><title>2026-05-16: 1 Codex sessions</title></rect>
-  <rect class="day" x="1256" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="1256" y="211" width="11" height="11" fill="#f3d98f"><title>2026-05-18: 4 Codex sessions</title></rect>
-  <rect class="day" x="1256" y="237" width="11" height="11" fill="#f3d98f"><title>2026-05-19: 1 Codex sessions</title></rect>
-  <rect class="day" x="1256" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="1256" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="1256" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="1256" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="1282" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="1282" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="1282" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-26: 0 Codex sessions</title></rect>
-  <rect class="day" x="1282" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-27: 0 Codex sessions</title></rect>
-  <rect class="day" x="1282" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-28: 0 Codex sessions</title></rect>
-  <rect class="day" x="1282" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-29: 0 Codex sessions</title></rect>
-  <rect class="day" x="1282" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-30: 0 Codex sessions</title></rect>
-  <rect class="day" x="1308" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-05-31: 0 Codex sessions</title></rect>
-  <rect class="day" x="1308" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="1308" y="237" width="11" height="11" fill="#f3d98f"><title>2026-06-02: 3 Codex sessions</title></rect>
-  <rect class="day" x="1308" y="263" width="11" height="11" fill="#f7df9b"><title>2026-06-03: 13 Codex sessions</title></rect>
-  <rect class="day" x="1308" y="289" width="11" height="11" fill="#f7df9b"><title>2026-06-04: 19 Codex sessions</title></rect>
-  <rect class="day" x="1308" y="315" width="11" height="11" fill="#f3d98f"><title>2026-06-05: 1 Codex sessions</title></rect>
-  <rect class="day" x="1308" y="341" width="11" height="11" fill="#f3d98f"><title>2026-06-06: 6 Codex sessions</title></rect>
-  <rect class="day" x="1334" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-07: 0 Codex sessions</title></rect>
-  <rect class="day" x="1334" y="211" width="11" height="11" fill="#f3d98f"><title>2026-06-08: 7 Codex sessions</title></rect>
-  <rect class="day" x="1334" y="237" width="11" height="11" fill="#f7df9b"><title>2026-06-09: 10 Codex sessions</title></rect>
-  <rect class="day" x="1334" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-10: 0 Codex sessions</title></rect>
-  <rect class="day" x="1334" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-11: 0 Codex sessions</title></rect>
-  <rect class="day" x="1334" y="315" width="11" height="11" fill="#f3d98f"><title>2026-06-12: 6 Codex sessions</title></rect>
-  <rect class="day" x="1334" y="341" width="11" height="11" fill="#f7df9b"><title>2026-06-13: 12 Codex sessions</title></rect>
-  <rect class="day" x="1360" y="185" width="11" height="11" fill="#f7df9b"><title>2026-06-14: 13 Codex sessions</title></rect>
-  <rect class="day" x="1360" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-15: 0 Codex sessions</title></rect>
-  <rect class="day" x="1360" y="237" width="11" height="11" fill="#f3d98f"><title>2026-06-16: 1 Codex sessions</title></rect>
-  <rect class="day" x="1360" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-17: 0 Codex sessions</title></rect>
-  <rect class="day" x="1360" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-18: 0 Codex sessions</title></rect>
-  <rect class="day" x="1360" y="315" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-19: 0 Codex sessions</title></rect>
-  <rect class="day" x="1360" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-20: 0 Codex sessions</title></rect>
-  <rect class="day" x="1386" y="185" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-21: 0 Codex sessions</title></rect>
-  <rect class="day" x="1386" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-22: 0 Codex sessions</title></rect>
-  <rect class="day" x="1386" y="237" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-23: 0 Codex sessions</title></rect>
-  <rect class="day" x="1386" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-24: 0 Codex sessions</title></rect>
-  <rect class="day" x="1386" y="289" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-25: 0 Codex sessions</title></rect>
-  <rect class="day" x="1386" y="315" width="11" height="11" fill="#f3d98f"><title>2026-06-26: 6 Codex sessions</title></rect>
-  <rect class="day" x="1386" y="341" width="11" height="11" fill="#f7df9b"><title>2026-06-27: 15 Codex sessions</title></rect>
-  <rect class="day" x="1412" y="185" width="11" height="11" fill="#f3d98f"><title>2026-06-28: 7 Codex sessions</title></rect>
-  <rect class="day" x="1412" y="211" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-06-29: 0 Codex sessions</title></rect>
-  <rect class="day" x="1412" y="237" width="11" height="11" fill="#f3d98f"><title>2026-06-30: 1 Codex sessions</title></rect>
-  <rect class="day" x="1412" y="263" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-07-01: 0 Codex sessions</title></rect>
-  <rect class="day" x="1412" y="289" width="11" height="11" fill="#fff0c2"><title>2026-07-02: 39 Codex sessions</title></rect>
-  <rect class="day" x="1412" y="315" width="11" height="11" fill="#ffe9ae"><title>2026-07-03: 29 Codex sessions</title></rect>
-  <rect class="day" x="1412" y="341" width="11" height="11" fill="none" stroke="#5f6368" stroke-width="1.5"><title>2026-07-04: 0 Codex sessions</title></rect>
+  <rect width="100%" height="100%" rx="18" fill="url(#shell)"/>
+  <rect x="54" y="34" width="892" height="322" rx="12" fill="#0b0d0f" stroke="#243044" stroke-width="1" filter="url(#softShadow)"/>
+  <text class="small ui" x="78" y="61">Profile</text>
+  <text class="small ui" x="834" y="61">Private</text>
+  <text class="small ui" x="896" y="61">Edit</text>
+  <circle cx="500" cy="83" r="25" fill="url(#avatar)"/>
+  <text class="title ui" x="500" y="131" text-anchor="middle">kimsj1686</text>
+  <text class="small ui" x="500" y="151" text-anchor="middle">@kimsj1686 - Codex</text>
+  <text class="metric ui" x="294" y="187" text-anchor="middle">5.91B</text>
+  <text class="label ui" x="294" y="204" text-anchor="middle">Lifetime tokens</text>
+  <line x1="345" y1="172" x2="345" y2="207" stroke="#151c28" stroke-width="1"/>
+  <text class="metric ui" x="397" y="187" text-anchor="middle">353M</text>
+  <text class="label ui" x="397" y="204" text-anchor="middle">Peak tokens</text>
+  <line x1="448" y1="172" x2="448" y2="207" stroke="#151c28" stroke-width="1"/>
+  <text class="metric ui" x="500" y="187" text-anchor="middle">5h 12m</text>
+  <text class="label ui" x="500" y="204" text-anchor="middle">Longest task</text>
+  <line x1="551" y1="172" x2="551" y2="207" stroke="#151c28" stroke-width="1"/>
+  <text class="metric ui" x="603" y="187" text-anchor="middle">2d</text>
+  <text class="label ui" x="603" y="204" text-anchor="middle">Current streak</text>
+  <line x1="654" y1="172" x2="654" y2="207" stroke="#151c28" stroke-width="1"/>
+  <text class="metric ui" x="706" y="187" text-anchor="middle">49d</text>
+  <text class="label ui" x="706" y="204" text-anchor="middle">Longest streak</text>
+  <text class="label ui" x="205" y="245" fill="#dbeafe">Token activity</text>
+  <text class="tab activeTab ui" x="690" y="245">Daily</text>
+  <text class="tab ui" x="737" y="245">Weekly</text>
+  <text class="tab ui" x="793" y="245">Cumulative</text>
+  <text class="month ui" x="253" y="360">Aug</text>
+  <text class="month ui" x="313" y="360">Sep</text>
+  <text class="month ui" x="361" y="360">Oct</text>
+  <text class="month ui" x="409" y="360">Nov</text>
+  <text class="month ui" x="469" y="360">Dec</text>
+  <text class="month ui" x="517" y="360">Jan</text>
+  <text class="month ui" x="577" y="360">Feb</text>
+  <text class="month ui" x="625" y="360">Mar</text>
+  <text class="month ui" x="673" y="360">Apr</text>
+  <text class="month ui" x="721" y="360">May</text>
+  <text class="month ui" x="781" y="360">Jun</text>
+  <rect class="day" x="205" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-06-29: 0 Codex sessions</title></rect>
+  <rect class="day" x="205" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-06-30: 0 Codex sessions</title></rect>
+  <rect class="day" x="205" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="205" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-02: 0 Codex sessions</title></rect>
+  <rect class="day" x="205" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-03: 0 Codex sessions</title></rect>
+  <rect class="day" x="205" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-04: 0 Codex sessions</title></rect>
+  <rect class="day" x="205" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-05: 0 Codex sessions</title></rect>
+  <rect class="day" x="217" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-06: 0 Codex sessions</title></rect>
+  <rect class="day" x="217" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-07: 0 Codex sessions</title></rect>
+  <rect class="day" x="217" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-08: 0 Codex sessions</title></rect>
+  <rect class="day" x="217" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-09: 0 Codex sessions</title></rect>
+  <rect class="day" x="217" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-10: 0 Codex sessions</title></rect>
+  <rect class="day" x="217" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-11: 0 Codex sessions</title></rect>
+  <rect class="day" x="217" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-12: 0 Codex sessions</title></rect>
+  <rect class="day" x="229" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-13: 0 Codex sessions</title></rect>
+  <rect class="day" x="229" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-14: 0 Codex sessions</title></rect>
+  <rect class="day" x="229" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="229" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-16: 0 Codex sessions</title></rect>
+  <rect class="day" x="229" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="229" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-18: 0 Codex sessions</title></rect>
+  <rect class="day" x="229" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-19: 0 Codex sessions</title></rect>
+  <rect class="day" x="241" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="241" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="241" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="241" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="241" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="241" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="241" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-26: 0 Codex sessions</title></rect>
+  <rect class="day" x="253" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-27: 0 Codex sessions</title></rect>
+  <rect class="day" x="253" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-28: 0 Codex sessions</title></rect>
+  <rect class="day" x="253" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-29: 0 Codex sessions</title></rect>
+  <rect class="day" x="253" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-30: 0 Codex sessions</title></rect>
+  <rect class="day" x="253" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-07-31: 0 Codex sessions</title></rect>
+  <rect class="day" x="253" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="253" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-02: 0 Codex sessions</title></rect>
+  <rect class="day" x="265" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-03: 0 Codex sessions</title></rect>
+  <rect class="day" x="265" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-04: 0 Codex sessions</title></rect>
+  <rect class="day" x="265" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-05: 0 Codex sessions</title></rect>
+  <rect class="day" x="265" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-06: 0 Codex sessions</title></rect>
+  <rect class="day" x="265" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-07: 0 Codex sessions</title></rect>
+  <rect class="day" x="265" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-08: 0 Codex sessions</title></rect>
+  <rect class="day" x="265" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-09: 0 Codex sessions</title></rect>
+  <rect class="day" x="277" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-10: 0 Codex sessions</title></rect>
+  <rect class="day" x="277" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-11: 0 Codex sessions</title></rect>
+  <rect class="day" x="277" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-12: 0 Codex sessions</title></rect>
+  <rect class="day" x="277" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-13: 0 Codex sessions</title></rect>
+  <rect class="day" x="277" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-14: 0 Codex sessions</title></rect>
+  <rect class="day" x="277" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="277" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-16: 0 Codex sessions</title></rect>
+  <rect class="day" x="289" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="289" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-18: 0 Codex sessions</title></rect>
+  <rect class="day" x="289" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-19: 0 Codex sessions</title></rect>
+  <rect class="day" x="289" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="289" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="289" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="289" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="301" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="301" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="301" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-26: 0 Codex sessions</title></rect>
+  <rect class="day" x="301" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-27: 0 Codex sessions</title></rect>
+  <rect class="day" x="301" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-28: 0 Codex sessions</title></rect>
+  <rect class="day" x="301" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-29: 0 Codex sessions</title></rect>
+  <rect class="day" x="301" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-30: 0 Codex sessions</title></rect>
+  <rect class="day" x="313" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-08-31: 0 Codex sessions</title></rect>
+  <rect class="day" x="313" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="313" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-02: 0 Codex sessions</title></rect>
+  <rect class="day" x="313" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-03: 0 Codex sessions</title></rect>
+  <rect class="day" x="313" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-04: 0 Codex sessions</title></rect>
+  <rect class="day" x="313" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-05: 0 Codex sessions</title></rect>
+  <rect class="day" x="313" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-06: 0 Codex sessions</title></rect>
+  <rect class="day" x="325" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-07: 0 Codex sessions</title></rect>
+  <rect class="day" x="325" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-08: 0 Codex sessions</title></rect>
+  <rect class="day" x="325" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-09: 0 Codex sessions</title></rect>
+  <rect class="day" x="325" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-10: 0 Codex sessions</title></rect>
+  <rect class="day" x="325" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-11: 0 Codex sessions</title></rect>
+  <rect class="day" x="325" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-12: 0 Codex sessions</title></rect>
+  <rect class="day" x="325" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-13: 0 Codex sessions</title></rect>
+  <rect class="day" x="337" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-14: 0 Codex sessions</title></rect>
+  <rect class="day" x="337" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="337" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-16: 0 Codex sessions</title></rect>
+  <rect class="day" x="337" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="337" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-18: 0 Codex sessions</title></rect>
+  <rect class="day" x="337" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-19: 0 Codex sessions</title></rect>
+  <rect class="day" x="337" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="349" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="349" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="349" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="349" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="349" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="349" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-26: 0 Codex sessions</title></rect>
+  <rect class="day" x="349" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-27: 0 Codex sessions</title></rect>
+  <rect class="day" x="361" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-28: 0 Codex sessions</title></rect>
+  <rect class="day" x="361" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-29: 0 Codex sessions</title></rect>
+  <rect class="day" x="361" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-09-30: 0 Codex sessions</title></rect>
+  <rect class="day" x="361" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="361" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-02: 0 Codex sessions</title></rect>
+  <rect class="day" x="361" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-03: 0 Codex sessions</title></rect>
+  <rect class="day" x="361" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-04: 0 Codex sessions</title></rect>
+  <rect class="day" x="373" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-05: 0 Codex sessions</title></rect>
+  <rect class="day" x="373" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-06: 0 Codex sessions</title></rect>
+  <rect class="day" x="373" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-07: 0 Codex sessions</title></rect>
+  <rect class="day" x="373" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-08: 0 Codex sessions</title></rect>
+  <rect class="day" x="373" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-09: 0 Codex sessions</title></rect>
+  <rect class="day" x="373" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-10: 0 Codex sessions</title></rect>
+  <rect class="day" x="373" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-11: 0 Codex sessions</title></rect>
+  <rect class="day" x="385" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-12: 0 Codex sessions</title></rect>
+  <rect class="day" x="385" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-13: 0 Codex sessions</title></rect>
+  <rect class="day" x="385" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-14: 0 Codex sessions</title></rect>
+  <rect class="day" x="385" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="385" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-16: 0 Codex sessions</title></rect>
+  <rect class="day" x="385" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="385" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-18: 0 Codex sessions</title></rect>
+  <rect class="day" x="397" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-19: 0 Codex sessions</title></rect>
+  <rect class="day" x="397" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="397" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="397" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="397" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="397" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="397" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="409" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-26: 0 Codex sessions</title></rect>
+  <rect class="day" x="409" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-27: 0 Codex sessions</title></rect>
+  <rect class="day" x="409" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-28: 0 Codex sessions</title></rect>
+  <rect class="day" x="409" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-29: 0 Codex sessions</title></rect>
+  <rect class="day" x="409" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-30: 0 Codex sessions</title></rect>
+  <rect class="day" x="409" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-10-31: 0 Codex sessions</title></rect>
+  <rect class="day" x="409" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="421" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-02: 0 Codex sessions</title></rect>
+  <rect class="day" x="421" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-03: 0 Codex sessions</title></rect>
+  <rect class="day" x="421" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-04: 0 Codex sessions</title></rect>
+  <rect class="day" x="421" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-05: 0 Codex sessions</title></rect>
+  <rect class="day" x="421" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-06: 0 Codex sessions</title></rect>
+  <rect class="day" x="421" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-07: 0 Codex sessions</title></rect>
+  <rect class="day" x="421" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-08: 0 Codex sessions</title></rect>
+  <rect class="day" x="433" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-09: 0 Codex sessions</title></rect>
+  <rect class="day" x="433" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-10: 0 Codex sessions</title></rect>
+  <rect class="day" x="433" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-11: 0 Codex sessions</title></rect>
+  <rect class="day" x="433" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-12: 0 Codex sessions</title></rect>
+  <rect class="day" x="433" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-13: 0 Codex sessions</title></rect>
+  <rect class="day" x="433" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-14: 0 Codex sessions</title></rect>
+  <rect class="day" x="433" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="445" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-16: 0 Codex sessions</title></rect>
+  <rect class="day" x="445" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="445" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-18: 0 Codex sessions</title></rect>
+  <rect class="day" x="445" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-19: 0 Codex sessions</title></rect>
+  <rect class="day" x="445" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="445" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="445" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="457" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="457" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="457" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="457" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-26: 0 Codex sessions</title></rect>
+  <rect class="day" x="457" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-27: 0 Codex sessions</title></rect>
+  <rect class="day" x="457" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-28: 0 Codex sessions</title></rect>
+  <rect class="day" x="457" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-29: 0 Codex sessions</title></rect>
+  <rect class="day" x="469" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-11-30: 0 Codex sessions</title></rect>
+  <rect class="day" x="469" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="469" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-02: 0 Codex sessions</title></rect>
+  <rect class="day" x="469" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-03: 0 Codex sessions</title></rect>
+  <rect class="day" x="469" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-04: 0 Codex sessions</title></rect>
+  <rect class="day" x="469" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-05: 0 Codex sessions</title></rect>
+  <rect class="day" x="469" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-06: 0 Codex sessions</title></rect>
+  <rect class="day" x="481" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-07: 0 Codex sessions</title></rect>
+  <rect class="day" x="481" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-08: 0 Codex sessions</title></rect>
+  <rect class="day" x="481" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-09: 0 Codex sessions</title></rect>
+  <rect class="day" x="481" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-10: 0 Codex sessions</title></rect>
+  <rect class="day" x="481" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-11: 0 Codex sessions</title></rect>
+  <rect class="day" x="481" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-12: 0 Codex sessions</title></rect>
+  <rect class="day" x="481" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-13: 0 Codex sessions</title></rect>
+  <rect class="day" x="493" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-14: 0 Codex sessions</title></rect>
+  <rect class="day" x="493" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="493" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-16: 0 Codex sessions</title></rect>
+  <rect class="day" x="493" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="493" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-18: 0 Codex sessions</title></rect>
+  <rect class="day" x="493" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-19: 0 Codex sessions</title></rect>
+  <rect class="day" x="493" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="505" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="505" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="505" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="505" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="505" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="505" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-26: 0 Codex sessions</title></rect>
+  <rect class="day" x="505" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-27: 0 Codex sessions</title></rect>
+  <rect class="day" x="517" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-28: 0 Codex sessions</title></rect>
+  <rect class="day" x="517" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-29: 0 Codex sessions</title></rect>
+  <rect class="day" x="517" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-30: 0 Codex sessions</title></rect>
+  <rect class="day" x="517" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2025-12-31: 0 Codex sessions</title></rect>
+  <rect class="day" x="517" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="517" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-02: 0 Codex sessions</title></rect>
+  <rect class="day" x="517" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-03: 0 Codex sessions</title></rect>
+  <rect class="day" x="529" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-04: 0 Codex sessions</title></rect>
+  <rect class="day" x="529" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-05: 0 Codex sessions</title></rect>
+  <rect class="day" x="529" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-06: 0 Codex sessions</title></rect>
+  <rect class="day" x="529" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-07: 0 Codex sessions</title></rect>
+  <rect class="day" x="529" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-08: 0 Codex sessions</title></rect>
+  <rect class="day" x="529" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-09: 0 Codex sessions</title></rect>
+  <rect class="day" x="529" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-10: 0 Codex sessions</title></rect>
+  <rect class="day" x="541" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-11: 0 Codex sessions</title></rect>
+  <rect class="day" x="541" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-12: 0 Codex sessions</title></rect>
+  <rect class="day" x="541" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-13: 0 Codex sessions</title></rect>
+  <rect class="day" x="541" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-14: 0 Codex sessions</title></rect>
+  <rect class="day" x="541" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="541" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-16: 0 Codex sessions</title></rect>
+  <rect class="day" x="541" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="553" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-18: 0 Codex sessions</title></rect>
+  <rect class="day" x="553" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-19: 0 Codex sessions</title></rect>
+  <rect class="day" x="553" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="553" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="553" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="553" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="553" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="565" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="565" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-26: 0 Codex sessions</title></rect>
+  <rect class="day" x="565" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-27: 0 Codex sessions</title></rect>
+  <rect class="day" x="565" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-28: 0 Codex sessions</title></rect>
+  <rect class="day" x="565" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-29: 0 Codex sessions</title></rect>
+  <rect class="day" x="565" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-30: 0 Codex sessions</title></rect>
+  <rect class="day" x="565" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-01-31: 0 Codex sessions</title></rect>
+  <rect class="day" x="577" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="577" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-02: 0 Codex sessions</title></rect>
+  <rect class="day" x="577" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-03: 0 Codex sessions</title></rect>
+  <rect class="day" x="577" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-04: 0 Codex sessions</title></rect>
+  <rect class="day" x="577" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-05: 0 Codex sessions</title></rect>
+  <rect class="day" x="577" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-06: 0 Codex sessions</title></rect>
+  <rect class="day" x="577" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-07: 0 Codex sessions</title></rect>
+  <rect class="day" x="589" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-08: 0 Codex sessions</title></rect>
+  <rect class="day" x="589" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-09: 0 Codex sessions</title></rect>
+  <rect class="day" x="589" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-10: 0 Codex sessions</title></rect>
+  <rect class="day" x="589" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-11: 0 Codex sessions</title></rect>
+  <rect class="day" x="589" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-12: 0 Codex sessions</title></rect>
+  <rect class="day" x="589" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-13: 0 Codex sessions</title></rect>
+  <rect class="day" x="589" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-14: 0 Codex sessions</title></rect>
+  <rect class="day" x="601" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="601" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-16: 0 Codex sessions</title></rect>
+  <rect class="day" x="601" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="601" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-18: 0 Codex sessions</title></rect>
+  <rect class="day" x="601" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-19: 0 Codex sessions</title></rect>
+  <rect class="day" x="601" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="601" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="613" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="613" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="613" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="613" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="613" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-26: 0 Codex sessions</title></rect>
+  <rect class="day" x="613" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-27: 0 Codex sessions</title></rect>
+  <rect class="day" x="613" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-02-28: 0 Codex sessions</title></rect>
+  <rect class="day" x="625" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="625" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-02: 0 Codex sessions</title></rect>
+  <rect class="day" x="625" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-03: 0 Codex sessions</title></rect>
+  <rect class="day" x="625" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-04: 0 Codex sessions</title></rect>
+  <rect class="day" x="625" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-05: 0 Codex sessions</title></rect>
+  <rect class="day" x="625" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-06: 0 Codex sessions</title></rect>
+  <rect class="day" x="625" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-07: 0 Codex sessions</title></rect>
+  <rect class="day" x="637" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-08: 0 Codex sessions</title></rect>
+  <rect class="day" x="637" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-09: 0 Codex sessions</title></rect>
+  <rect class="day" x="637" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-10: 0 Codex sessions</title></rect>
+  <rect class="day" x="637" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-11: 0 Codex sessions</title></rect>
+  <rect class="day" x="637" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-12: 0 Codex sessions</title></rect>
+  <rect class="day" x="637" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-13: 0 Codex sessions</title></rect>
+  <rect class="day" x="637" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-14: 0 Codex sessions</title></rect>
+  <rect class="day" x="649" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="649" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-16: 0 Codex sessions</title></rect>
+  <rect class="day" x="649" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="649" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-18: 0 Codex sessions</title></rect>
+  <rect class="day" x="649" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-19: 0 Codex sessions</title></rect>
+  <rect class="day" x="649" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="649" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="661" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="661" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="661" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="661" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="661" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-26: 0 Codex sessions</title></rect>
+  <rect class="day" x="661" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-27: 0 Codex sessions</title></rect>
+  <rect class="day" x="661" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-28: 0 Codex sessions</title></rect>
+  <rect class="day" x="673" y="256" width="9" height="9" rx="2" fill="#17345f"><title>2026-03-29: 5 Codex sessions</title></rect>
+  <rect class="day" x="673" y="268" width="9" height="9" rx="2" fill="#17345f"><title>2026-03-30: 2 Codex sessions</title></rect>
+  <rect class="day" x="673" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-03-31: 0 Codex sessions</title></rect>
+  <rect class="day" x="673" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="673" y="304" width="9" height="9" rx="2" fill="#17345f"><title>2026-04-02: 1 Codex sessions</title></rect>
+  <rect class="day" x="673" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-03: 0 Codex sessions</title></rect>
+  <rect class="day" x="673" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-04: 0 Codex sessions</title></rect>
+  <rect class="day" x="685" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-05: 0 Codex sessions</title></rect>
+  <rect class="day" x="685" y="268" width="9" height="9" rx="2" fill="#17345f"><title>2026-04-06: 7 Codex sessions</title></rect>
+  <rect class="day" x="685" y="280" width="9" height="9" rx="2" fill="#17345f"><title>2026-04-07: 3 Codex sessions</title></rect>
+  <rect class="day" x="685" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-08: 0 Codex sessions</title></rect>
+  <rect class="day" x="685" y="304" width="9" height="9" rx="2" fill="#17345f"><title>2026-04-09: 6 Codex sessions</title></rect>
+  <rect class="day" x="685" y="316" width="9" height="9" rx="2" fill="#225ea8"><title>2026-04-10: 14 Codex sessions</title></rect>
+  <rect class="day" x="685" y="328" width="9" height="9" rx="2" fill="#3b82f6"><title>2026-04-11: 25 Codex sessions</title></rect>
+  <rect class="day" x="697" y="256" width="9" height="9" rx="2" fill="#3b82f6"><title>2026-04-12: 25 Codex sessions</title></rect>
+  <rect class="day" x="697" y="268" width="9" height="9" rx="2" fill="#3b82f6"><title>2026-04-13: 20 Codex sessions</title></rect>
+  <rect class="day" x="697" y="280" width="9" height="9" rx="2" fill="#17345f"><title>2026-04-14: 4 Codex sessions</title></rect>
+  <rect class="day" x="697" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="697" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-16: 0 Codex sessions</title></rect>
+  <rect class="day" x="697" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="697" y="328" width="9" height="9" rx="2" fill="#17345f"><title>2026-04-18: 4 Codex sessions</title></rect>
+  <rect class="day" x="709" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-19: 0 Codex sessions</title></rect>
+  <rect class="day" x="709" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="709" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="709" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="709" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="709" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="709" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="721" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-26: 0 Codex sessions</title></rect>
+  <rect class="day" x="721" y="268" width="9" height="9" rx="2" fill="#17345f"><title>2026-04-27: 5 Codex sessions</title></rect>
+  <rect class="day" x="721" y="280" width="9" height="9" rx="2" fill="#17345f"><title>2026-04-28: 3 Codex sessions</title></rect>
+  <rect class="day" x="721" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-29: 0 Codex sessions</title></rect>
+  <rect class="day" x="721" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-04-30: 0 Codex sessions</title></rect>
+  <rect class="day" x="721" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="721" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-02: 0 Codex sessions</title></rect>
+  <rect class="day" x="733" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-03: 0 Codex sessions</title></rect>
+  <rect class="day" x="733" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-04: 0 Codex sessions</title></rect>
+  <rect class="day" x="733" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-05: 0 Codex sessions</title></rect>
+  <rect class="day" x="733" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-06: 0 Codex sessions</title></rect>
+  <rect class="day" x="733" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-07: 0 Codex sessions</title></rect>
+  <rect class="day" x="733" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-08: 0 Codex sessions</title></rect>
+  <rect class="day" x="733" y="328" width="9" height="9" rx="2" fill="#17345f"><title>2026-05-09: 1 Codex sessions</title></rect>
+  <rect class="day" x="745" y="256" width="9" height="9" rx="2" fill="#17345f"><title>2026-05-10: 3 Codex sessions</title></rect>
+  <rect class="day" x="745" y="268" width="9" height="9" rx="2" fill="#225ea8"><title>2026-05-11: 10 Codex sessions</title></rect>
+  <rect class="day" x="745" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-12: 0 Codex sessions</title></rect>
+  <rect class="day" x="745" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-13: 0 Codex sessions</title></rect>
+  <rect class="day" x="745" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-14: 0 Codex sessions</title></rect>
+  <rect class="day" x="745" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="745" y="328" width="9" height="9" rx="2" fill="#17345f"><title>2026-05-16: 1 Codex sessions</title></rect>
+  <rect class="day" x="757" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="757" y="268" width="9" height="9" rx="2" fill="#17345f"><title>2026-05-18: 4 Codex sessions</title></rect>
+  <rect class="day" x="757" y="280" width="9" height="9" rx="2" fill="#17345f"><title>2026-05-19: 1 Codex sessions</title></rect>
+  <rect class="day" x="757" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="757" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="757" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="757" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="769" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="769" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="769" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-26: 0 Codex sessions</title></rect>
+  <rect class="day" x="769" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-27: 0 Codex sessions</title></rect>
+  <rect class="day" x="769" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-28: 0 Codex sessions</title></rect>
+  <rect class="day" x="769" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-29: 0 Codex sessions</title></rect>
+  <rect class="day" x="769" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-30: 0 Codex sessions</title></rect>
+  <rect class="day" x="781" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-05-31: 0 Codex sessions</title></rect>
+  <rect class="day" x="781" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="781" y="280" width="9" height="9" rx="2" fill="#17345f"><title>2026-06-02: 3 Codex sessions</title></rect>
+  <rect class="day" x="781" y="292" width="9" height="9" rx="2" fill="#225ea8"><title>2026-06-03: 13 Codex sessions</title></rect>
+  <rect class="day" x="781" y="304" width="9" height="9" rx="2" fill="#225ea8"><title>2026-06-04: 19 Codex sessions</title></rect>
+  <rect class="day" x="781" y="316" width="9" height="9" rx="2" fill="#17345f"><title>2026-06-05: 1 Codex sessions</title></rect>
+  <rect class="day" x="781" y="328" width="9" height="9" rx="2" fill="#17345f"><title>2026-06-06: 6 Codex sessions</title></rect>
+  <rect class="day" x="793" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-07: 0 Codex sessions</title></rect>
+  <rect class="day" x="793" y="268" width="9" height="9" rx="2" fill="#17345f"><title>2026-06-08: 7 Codex sessions</title></rect>
+  <rect class="day" x="793" y="280" width="9" height="9" rx="2" fill="#225ea8"><title>2026-06-09: 10 Codex sessions</title></rect>
+  <rect class="day" x="793" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-10: 0 Codex sessions</title></rect>
+  <rect class="day" x="793" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-11: 0 Codex sessions</title></rect>
+  <rect class="day" x="793" y="316" width="9" height="9" rx="2" fill="#17345f"><title>2026-06-12: 6 Codex sessions</title></rect>
+  <rect class="day" x="793" y="328" width="9" height="9" rx="2" fill="#225ea8"><title>2026-06-13: 12 Codex sessions</title></rect>
+  <rect class="day" x="805" y="256" width="9" height="9" rx="2" fill="#225ea8"><title>2026-06-14: 13 Codex sessions</title></rect>
+  <rect class="day" x="805" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-15: 0 Codex sessions</title></rect>
+  <rect class="day" x="805" y="280" width="9" height="9" rx="2" fill="#17345f"><title>2026-06-16: 1 Codex sessions</title></rect>
+  <rect class="day" x="805" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-17: 0 Codex sessions</title></rect>
+  <rect class="day" x="805" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-18: 0 Codex sessions</title></rect>
+  <rect class="day" x="805" y="316" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-19: 0 Codex sessions</title></rect>
+  <rect class="day" x="805" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-20: 0 Codex sessions</title></rect>
+  <rect class="day" x="817" y="256" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-21: 0 Codex sessions</title></rect>
+  <rect class="day" x="817" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-22: 0 Codex sessions</title></rect>
+  <rect class="day" x="817" y="280" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-23: 0 Codex sessions</title></rect>
+  <rect class="day" x="817" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-24: 0 Codex sessions</title></rect>
+  <rect class="day" x="817" y="304" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-25: 0 Codex sessions</title></rect>
+  <rect class="day" x="817" y="316" width="9" height="9" rx="2" fill="#17345f"><title>2026-06-26: 6 Codex sessions</title></rect>
+  <rect class="day" x="817" y="328" width="9" height="9" rx="2" fill="#225ea8"><title>2026-06-27: 15 Codex sessions</title></rect>
+  <rect class="day" x="829" y="256" width="9" height="9" rx="2" fill="#17345f"><title>2026-06-28: 7 Codex sessions</title></rect>
+  <rect class="day" x="829" y="268" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-06-29: 0 Codex sessions</title></rect>
+  <rect class="day" x="829" y="280" width="9" height="9" rx="2" fill="#17345f"><title>2026-06-30: 1 Codex sessions</title></rect>
+  <rect class="day" x="829" y="292" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-07-01: 0 Codex sessions</title></rect>
+  <rect class="day" x="829" y="304" width="9" height="9" rx="2" fill="#8bbcff"><title>2026-07-02: 39 Codex sessions</title></rect>
+  <rect class="day" x="829" y="316" width="9" height="9" rx="2" fill="#3b82f6"><title>2026-07-03: 29 Codex sessions</title></rect>
+  <rect class="day" x="829" y="328" width="9" height="9" rx="2" fill="#1a2230" opacity="0.72"><title>2026-07-04: 0 Codex sessions</title></rect>
 </svg>

@@ -1,8 +1,8 @@
-## Codex Activity
+## Codex 사용 현황
 
-![Codex Activity](assets/codex-activity.svg)
+![Codex 사용 현황](assets/codex-activity.svg)
 
-Manual update:
+수동 업데이트:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\update-codex-activity.ps1
@@ -11,10 +11,10 @@ git commit -m "Update Codex activity"
 git push
 ```
 
-To change the headline numbers shown in the graph:
+잔디 상단 숫자를 바꿀 때:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\scripts\update-codex-activity.ps1 -Lifetime "5.91B" -Peak "353M" -Streak "2d" -BestStreak "49d" -LongestTask "5h 12m"
 ```
 
-Only aggregated activity is published. Raw Codex logs stay local.
+공개되는 것은 집계된 사용 현황뿐입니다. 원본 Codex 로그는 로컬에만 보관합니다.

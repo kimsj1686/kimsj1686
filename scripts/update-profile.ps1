@@ -10,7 +10,7 @@ $env:GITHUB_LOGIN = if ($env:GITHUB_LOGIN) { $env:GITHUB_LOGIN } else { "kimsj16
 
 npm run update:profile
 
-git add assets/activity-profile.svg data/codex-activity.json data/github-contributions.json
+git add assets/activity-profile.svg data/codex-activity.json
 
 $changes = git diff --cached --name-only
 if (-not $changes) {

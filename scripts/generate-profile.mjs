@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -6,7 +7,6 @@ const root = path.resolve(import.meta.dirname, "..");
 const assetsDir = path.join(root, "assets");
 const dataDir = path.join(root, "data");
 const codexDataPath = path.join(dataDir, "codex-activity.json");
-const githubDataPath = path.join(dataDir, "github-contributions.json");
 const svgPath = path.join(assetsDir, "activity-profile.svg");
 
 const login = process.env.GITHUB_LOGIN || "kimsj1686";
@@ -19,14 +19,15 @@ fs.mkdirSync(dataDir, { recursive: true });
 const today = startOfDay(new Date());
 const from = addDays(today, -364);
 const codexActivity = loadCodexActivity();
-const githubActivity = await loadGithubActivity();
 
-fs.writeFileSync(svgPath, renderSvg(codexActivity, githubActivity), "utf8");
+fs.writeFileSync(svgPath, renderSvg(codexActivity), "utf8");
 
 function loadCodexActivity() {
   const sessionsDir = path.join(codexHome, "sessions");
+  const stateDb = path.join(codexHome, "state_5.sqlite");
+
   if (fs.existsSync(sessionsDir)) {
-    const activity = collectCodexActivity(sessionsDir);
+    const activity = collectCodexActivity(sessionsDir, stateDb);
     fs.writeFileSync(codexDataPath, JSON.stringify(activity, null, 2) + "\n", "utf8");
     return activity;
   }
@@ -37,59 +38,97 @@ function loadCodexActivity() {
 
   return {
     generatedAt: new Date().toISOString(),
-    days: [],
-    totals: {
-      sessions: 0,
-      totalTokens: 0,
-      maxSessionTokens: 0,
-      longestSessionMinutes: 0,
-      currentStreak: 0,
-      longestStreak: 0,
-      toolCalls: 0
-    },
+    source: "no local Codex data found",
+    days: emptyDays(),
+    totals: emptyTotals(),
     topTools: []
   };
 }
 
-async function loadGithubActivity() {
-  const token = process.env.GITHUB_TOKEN;
-  if (token) {
-    try {
-      const activity = await fetchGithubContributions(token);
-      fs.writeFileSync(githubDataPath, JSON.stringify(activity, null, 2) + "\n", "utf8");
-      return activity;
-    } catch (error) {
-      console.warn(`GitHub contribution fetch failed: ${error.message}`);
+function collectCodexActivity(sessionsDir, stateDb) {
+  const sessionFiles = listJsonlFiles(sessionsDir);
+  const bySession = parseSessionFiles(sessionFiles);
+  const stateRows = readThreadState(stateDb);
+
+  const dayTokens = new Map();
+  const activeDays = new Set();
+  let totalTokens = 0;
+  let maxSessionTokens = 0;
+  let longestSessionMinutes = 0;
+
+  if (stateRows.length) {
+    for (const row of stateRows) {
+      const created = new Date(Number(row.created_at || 0) * 1000);
+      if (!Number.isFinite(created.getTime())) continue;
+      const key = toDateKey(created);
+      const tokens = Number(row.tokens_used || 0);
+      activeDays.add(key);
+      dayTokens.set(key, (dayTokens.get(key) || 0) + tokens);
+      totalTokens += tokens;
+      maxSessionTokens = Math.max(maxSessionTokens, tokens);
+
+      const started = Number(row.created_at || 0);
+      const ended = Number(row.updated_at || 0);
+      if (started && ended) {
+        longestSessionMinutes = Math.max(longestSessionMinutes, Math.round((ended - started) / 60));
+      }
+    }
+  } else {
+    for (const session of bySession.values()) {
+      if (!session.day) continue;
+      activeDays.add(session.day);
+      dayTokens.set(session.day, (dayTokens.get(session.day) || 0) + session.tokens);
+      totalTokens += session.tokens;
+      maxSessionTokens = Math.max(maxSessionTokens, session.tokens);
+      longestSessionMinutes = Math.max(longestSessionMinutes, session.durationMinutes);
     }
   }
 
-  if (fs.existsSync(githubDataPath)) {
-    return JSON.parse(fs.readFileSync(githubDataPath, "utf8"));
+  const days = dateRange(from, today).map((date) => {
+    const key = toDateKey(date);
+    return { date: key, tokens: dayTokens.get(key) || 0, active: activeDays.has(key) };
+  });
+  const streaks = calculateStreaks(days.map((day) => ({ date: day.date, count: day.active ? 1 : 0 })));
+
+  const toolCounts = new Map();
+  for (const session of bySession.values()) {
+    for (const [name, count] of session.tools.entries()) {
+      toolCounts.set(name, (toolCounts.get(name) || 0) + count);
+    }
   }
 
   return {
     generatedAt: new Date().toISOString(),
-    totalContributions: 0,
-    days: dateRange(from, today).map((date) => ({ date: toDateKey(date), count: 0 }))
+    source: stateRows.length ? "Codex local SQLite threads table" : "Codex local session JSONL files",
+    days,
+    totals: {
+      sessions: stateRows.length || bySession.size,
+      totalTokens,
+      maxSessionTokens,
+      longestSessionMinutes,
+      currentStreak: streaks.current,
+      longestStreak: streaks.longest,
+      toolCalls: [...toolCounts.values()].reduce((sum, count) => sum + count, 0)
+    },
+    topTools: [...toolCounts.entries()]
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+      .slice(0, 5)
+      .map(([name, count]) => ({ name, count }))
   };
 }
 
-function collectCodexActivity(sessionsDir) {
-  const files = listJsonlFiles(sessionsDir);
-  const dayTokens = new Map();
-  const sessionDays = new Set();
-  const toolCounts = new Map();
-  let totalTokens = 0;
-  let maxSessionTokens = 0;
-  let longestSessionMinutes = 0;
-  let toolCalls = 0;
+function parseSessionFiles(files) {
+  const sessions = new Map();
 
   for (const file of files) {
     const lines = fs.readFileSync(file, "utf8").split(/\r?\n/).filter(Boolean);
-    let firstTs = null;
-    let lastTs = null;
-    let sessionDay = null;
-    let sessionMaxTokens = 0;
+    const session = {
+      day: null,
+      firstTs: null,
+      lastTs: null,
+      tokens: 0,
+      tools: new Map()
+    };
 
     for (const line of lines) {
       let event;
@@ -100,212 +139,138 @@ function collectCodexActivity(sessionsDir) {
       }
 
       const timestamp = parseEventDate(event);
-      if (timestamp) {
-        firstTs = firstTs ? new Date(Math.min(firstTs.getTime(), timestamp.getTime())) : timestamp;
-        lastTs = lastTs ? new Date(Math.max(lastTs.getTime(), timestamp.getTime())) : timestamp;
-        sessionDay ||= toDateKey(timestamp);
+      if (timestamp && Number.isFinite(timestamp.getTime())) {
+        session.firstTs = session.firstTs ? new Date(Math.min(session.firstTs.getTime(), timestamp.getTime())) : timestamp;
+        session.lastTs = session.lastTs ? new Date(Math.max(session.lastTs.getTime(), timestamp.getTime())) : timestamp;
+        session.day ||= toDateKey(timestamp);
       }
 
       if (event?.type === "event_msg" && event?.payload?.type === "token_count") {
         const total = event.payload.info?.total_token_usage?.total_tokens || 0;
-        sessionMaxTokens = Math.max(sessionMaxTokens, total);
+        session.tokens = Math.max(session.tokens, total);
       }
 
       if (event?.type === "response_item" && event?.payload?.type === "function_call") {
-        const name = normalizeToolName(event.payload.name);
-        if (name) {
-          toolCalls += 1;
-          toolCounts.set(name, (toolCounts.get(name) || 0) + 1);
-        }
+        addTool(session.tools, event.payload.name);
       }
 
       const nested = event?.payload?.arguments;
       if (typeof nested === "string" && nested.includes("recipient_name")) {
         for (const match of nested.matchAll(/"recipient_name"\s*:\s*"([^"]+)"/g)) {
-          const name = normalizeToolName(match[1]);
-          if (name) {
-            toolCalls += 1;
-            toolCounts.set(name, (toolCounts.get(name) || 0) + 1);
-          }
+          addTool(session.tools, match[1]);
         }
       }
     }
 
-    if (sessionDay) {
-      sessionDays.add(sessionDay);
-      dayTokens.set(sessionDay, (dayTokens.get(sessionDay) || 0) + sessionMaxTokens);
-    }
-
-    totalTokens += sessionMaxTokens;
-    maxSessionTokens = Math.max(maxSessionTokens, sessionMaxTokens);
-    if (firstTs && lastTs) {
-      longestSessionMinutes = Math.max(longestSessionMinutes, Math.round((lastTs - firstTs) / 60000));
-    }
+    session.durationMinutes =
+      session.firstTs && session.lastTs ? Math.max(1, Math.round((session.lastTs - session.firstTs) / 60000)) : 0;
+    sessions.set(file, session);
   }
 
-  const days = dateRange(from, today).map((date) => {
-    const key = toDateKey(date);
-    return { date: key, tokens: dayTokens.get(key) || 0, active: sessionDays.has(key) };
-  });
-  const streaks = calculateStreaks(days.map((day) => ({ date: day.date, count: day.active ? 1 : 0 })));
-
-  return {
-    generatedAt: new Date().toISOString(),
-    days,
-    totals: {
-      sessions: files.length,
-      totalTokens,
-      maxSessionTokens,
-      longestSessionMinutes,
-      currentStreak: streaks.current,
-      longestStreak: streaks.longest,
-      toolCalls
-    },
-    topTools: [...toolCounts.entries()]
-      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-      .slice(0, 5)
-      .map(([name, count]) => ({ name, count }))
-  };
+  return sessions;
 }
 
-async function fetchGithubContributions(token) {
-  const query = `
-    query($login: String!, $from: DateTime!, $to: DateTime!) {
-      user(login: $login) {
-        contributionsCollection(from: $from, to: $to) {
-          contributionCalendar {
-            totalContributions
-            weeks {
-              contributionDays {
-                date
-                contributionCount
-              }
-            }
-          }
-        }
-      }
-    }
-  `;
-  const response = await fetch("https://api.github.com/graphql", {
-    method: "POST",
-    headers: {
-      authorization: `Bearer ${token}`,
-      "content-type": "application/json",
-      "user-agent": "profile-activity-generator"
-    },
-    body: JSON.stringify({
-      query,
-      variables: { login, from: from.toISOString(), to: today.toISOString() }
-    })
-  });
-
-  if (!response.ok) {
-    throw new Error(`${response.status} ${response.statusText}`);
+function readThreadState(dbPath) {
+  if (!fs.existsSync(dbPath)) return [];
+  try {
+    const output = execFileSync(
+      "sqlite3",
+      [
+        "-json",
+        dbPath,
+        "select id, created_at, updated_at, tokens_used from threads where tokens_used > 0 order by created_at asc;"
+      ],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }
+    );
+    return JSON.parse(output || "[]");
+  } catch {
+    return [];
   }
-
-  const body = await response.json();
-  if (body.errors?.length) {
-    throw new Error(body.errors.map((error) => error.message).join("; "));
-  }
-
-  const calendar = body.data?.user?.contributionsCollection?.contributionCalendar;
-  const days = calendar?.weeks?.flatMap((week) => week.contributionDays) || [];
-  return {
-    generatedAt: new Date().toISOString(),
-    totalContributions: calendar?.totalContributions || 0,
-    days: days.map((day) => ({ date: day.date, count: day.contributionCount }))
-  };
 }
 
-function renderSvg(codex, github) {
+function renderSvg(codex) {
   const width = 1120;
-  const height = 910;
+  const height = 760;
   const codexDays = alignDays(codex.days, "tokens");
-  const githubDays = alignDays(github.days, "count");
   const codexMax = Math.max(...codexDays.map((day) => day.value), 1);
-  const githubMax = Math.max(...githubDays.map((day) => day.value), 1);
   const topTools = codex.topTools?.length ? codex.topTools : [{ name: "No tool data yet", count: 0 }];
-  const totals = codex.totals || {};
-  const githubStreaks = calculateStreaks(githubDays.map((day) => ({ date: day.date, count: day.value })));
+  const totals = codex.totals || emptyTotals();
   const generatedAt = new Date(codex.generatedAt || new Date()).toISOString().slice(0, 10);
+  const sourceLabel = codex.source?.includes("SQLite") ? "local Codex DB" : "local Codex sessions";
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">${escapeXml(displayName)} Codex and GitHub activity</title>
-  <desc id="desc">A profile card showing Codex usage, token activity, GitHub contributions, streaks, and top tools.</desc>
+  <title id="title">${escapeXml(displayName)} Codex activity</title>
+  <desc id="desc">A profile card showing local Codex token activity, session streaks, and top tools.</desc>
   <defs>
-    <linearGradient id="panel" x1="88" y1="85" x2="1000" y2="780" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#181818"/>
-      <stop offset="1" stop-color="#101010"/>
+    <linearGradient id="panel" x1="72" y1="64" x2="1048" y2="696" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#191919"/>
+      <stop offset="1" stop-color="#101112"/>
     </linearGradient>
-    <filter id="softShadow" x="64" y="66" width="992" height="822" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="18" stdDeviation="28" flood-color="#000000" flood-opacity="0.45"/>
+    <filter id="softShadow" x="45" y="42" width="1030" height="690" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="18" stdDeviation="28" flood-color="#000000" flood-opacity="0.38"/>
     </filter>
     <style>
-      .title { font: 700 34px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #f5f7fb; }
-      .meta { font: 500 16px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #9298a3; }
-      .label { font: 700 17px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #f0f2f5; }
-      .small { font: 600 14px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #9ba2ad; }
-      .value { font: 800 18px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #ffffff; }
-      .caption { font: 600 13px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #7f8792; }
+      .title { font: 800 38px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #f7f8fb; }
+      .meta { font: 600 16px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #9ba6b8; }
+      .label { font: 800 19px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #f3f6fb; }
+      .small { font: 650 14px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #9ba6b8; }
+      .value { font: 850 20px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #ffffff; }
+      .caption { font: 650 13px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #8290a4; }
+      .tool { font: 800 18px ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; fill: #f7f8fb; }
     </style>
   </defs>
 
-  <rect width="${width}" height="${height}" rx="0" fill="#0d0f10"/>
+  <rect width="${width}" height="${height}" fill="#0b0f12"/>
   <g filter="url(#softShadow)">
-    <rect x="72" y="72" width="976" height="784" rx="20" fill="url(#panel)" stroke="#242628"/>
+    <rect x="56" y="56" width="1008" height="648" rx="22" fill="url(#panel)" stroke="#2a2d31"/>
   </g>
 
-  <circle cx="560" cy="143" r="50" fill="#e77bbe"/>
-  <text x="560" y="158" text-anchor="middle" font-size="35" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-weight="700" fill="#ffffff">SJ</text>
-  <text x="560" y="222" text-anchor="middle" class="title">${escapeXml(displayName)}</text>
-  <text x="560" y="252" text-anchor="middle" class="meta">@${escapeXml(login)} · Codex + GitHub activity</text>
+  <circle cx="560" cy="130" r="52" fill="#de72bd"/>
+  <text x="560" y="148" text-anchor="middle" font-size="36" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-weight="850" fill="#ffffff">SJ</text>
+  <text x="560" y="214" text-anchor="middle" class="title">${escapeXml(displayName)}</text>
+  <text x="560" y="244" text-anchor="middle" class="meta">@${escapeXml(login)} · Codex activity · ${escapeXml(sourceLabel)}</text>
 
   ${renderStats([
     [formatCompact(totals.totalTokens || 0), "누적 토큰"],
     [formatCompact(totals.maxSessionTokens || 0), "최대 세션"],
-    [formatDuration(totals.longestSessionMinutes || 0), "최장 작업"],
-    [`${totals.currentStreak || 0}일`, "Codex 연속"],
-    [`${githubStreaks.current}일`, "GitHub 연속"]
+    [`${totals.sessions || 0}회`, "Codex 세션"],
+    [`${totals.currentStreak || 0}일`, "현재 연속"],
+    [`${totals.longestStreak || 0}일`, "최장 연속"]
   ])}
 
-  <text x="112" y="405" class="label">Codex 토큰 잔디</text>
-  <text x="927" y="405" text-anchor="end" class="small">일별</text>
-  ${renderHeatmap(codexDays, 112, 426, codexMax, ["#252525", "#203947", "#2e5b78", "#4b8fc8", "#86c5ff"])}
-  ${renderMonthLabels(112, 590)}
+  <text x="104" y="395" class="label">Codex 토큰 활동</text>
+  <text x="1016" y="395" text-anchor="end" class="small">최근 365일 · 마지막 갱신 ${escapeXml(generatedAt)}</text>
+  ${renderHeatmap(codexDays, 104, 418, codexMax, ["#252627", "#213745", "#2f5b75", "#478bc2", "#8ccbff"])}
+  ${renderMonthLabels(104, 580)}
 
-  <text x="112" y="650" class="label">GitHub 잔디</text>
-  <text x="927" y="650" text-anchor="end" class="small">${formatCompact(github.totalContributions || 0)} contributions</text>
-  ${renderHeatmap(githubDays, 112, 671, githubMax, ["#252525", "#0e4429", "#006d32", "#26a641", "#39d353"])}
-  ${renderMonthLabels(112, 835)}
+  <g transform="translate(104 626)">
+    ${renderInsightPills([
+      ["툴 호출", `${formatCompact(totals.toolCalls || 0)}회`],
+      ["최고 일간 토큰", formatCompact(codexMax)],
+      ["로컬 기준", generatedAt]
+    ])}
+  </g>
 
-  <text x="596" y="405" class="label">활동 인사이트</text>
-  ${renderInsightRows([
-    ["Codex 세션", `${totals.sessions || 0}회`],
-    ["툴 호출", `${formatCompact(totals.toolCalls || 0)}회`],
-    ["GitHub 기여", `${formatCompact(github.totalContributions || 0)}회`],
-    ["마지막 갱신", generatedAt]
-  ], 596, 436)}
-
-  <text x="596" y="575" class="label">가장 많이 사용한 툴</text>
-  ${renderToolRows(topTools, 596, 606)}
+  <text x="654" y="627" class="label">가장 많이 사용한 툴</text>
+  ${renderToolRows(topTools, 654, 659)}
 </svg>
 `;
 }
 
 function renderStats(items) {
-  const x = 112;
-  const y = 285;
-  const w = 916;
+  const x = 104;
+  const y = 278;
+  const w = 912;
   const cell = w / items.length;
   return `
-  <rect x="${x}" y="${y}" width="${w}" height="76" rx="16" fill="#131415" stroke="#27292c"/>
+  <rect x="${x}" y="${y}" width="${w}" height="80" rx="16" fill="#131516" stroke="#2b2f34"/>
   ${items.map(([value, label], index) => {
     const cx = x + cell * index + cell / 2;
-    const line = index === 0 ? "" : `<line x1="${x + cell * index}" y1="${y + 16}" x2="${x + cell * index}" y2="${y + 60}" stroke="#25282b"/>`;
+    const line = index === 0 ? "" : `<line x1="${x + cell * index}" y1="${y + 16}" x2="${x + cell * index}" y2="${y + 64}" stroke="#2a2d31"/>`;
     return `${line}
-  <text x="${cx}" y="${y + 31}" text-anchor="middle" class="value">${escapeXml(value)}</text>
-  <text x="${cx}" y="${y + 55}" text-anchor="middle" class="small">${escapeXml(label)}</text>`;
+  <text x="${cx}" y="${y + 34}" text-anchor="middle" class="value">${escapeXml(value)}</text>
+  <text x="${cx}" y="${y + 59}" text-anchor="middle" class="small">${escapeXml(label)}</text>`;
   }).join("")}`;
 }
 
@@ -325,18 +290,20 @@ function renderMonthLabels(x, y) {
   return months.map((month, index) => `<text x="${x + index * 78}" y="${y}" class="caption">${month}</text>`).join("\n  ");
 }
 
-function renderInsightRows(rows, x, y) {
+function renderInsightPills(rows) {
   return rows.map(([label, value], index) => {
-    const yy = y + index * 34;
-    return `<text x="${x}" y="${yy}" class="small">${escapeXml(label)}</text><text x="${x + 320}" y="${yy}" text-anchor="end" class="value">${escapeXml(value)}</text>`;
+    const x = index * 164;
+    return `<rect x="${x}" y="0" width="144" height="48" rx="12" fill="#15181b" stroke="#2b2f34"/>
+    <text x="${x + 16}" y="20" class="caption">${escapeXml(label)}</text>
+    <text x="${x + 16}" y="38" class="value">${escapeXml(value)}</text>`;
   }).join("\n  ");
 }
 
 function renderToolRows(tools, x, y) {
-  return tools.slice(0, 5).map((tool, index) => {
-    const yy = y + index * 34;
-    const color = ["#f7c948", "#54d2d2", "#ff8a4c", "#8bb8ff", "#e77bbe"][index % 5];
-    return `<circle cx="${x + 8}" cy="${yy - 5}" r="8" fill="${color}"/><text x="${x + 28}" y="${yy}" class="value">${escapeXml(tool.name)}</text><text x="${x + 430}" y="${yy}" text-anchor="end" class="small">${tool.count}회 실행</text>`;
+  return tools.slice(0, 3).map((tool, index) => {
+    const yy = y + index * 31;
+    const color = ["#ffd158", "#59d5dc", "#ff9564"][index % 3];
+    return `<circle cx="${x + 8}" cy="${yy - 6}" r="8" fill="${color}"/><text x="${x + 28}" y="${yy}" class="tool">${escapeXml(tool.name)}</text><text x="1016" y="${yy}" text-anchor="end" class="small">${tool.count}회 실행</text>`;
   }).join("\n  ");
 }
 
@@ -355,6 +322,11 @@ function listJsonlFiles(dir) {
     if (entry.isDirectory()) return listJsonlFiles(fullPath);
     return entry.isFile() && entry.name.endsWith(".jsonl") ? [fullPath] : [];
   });
+}
+
+function addTool(map, name) {
+  const normalized = normalizeToolName(name);
+  if (normalized) map.set(normalized, (map.get(normalized) || 0) + 1);
 }
 
 function parseEventDate(event) {
@@ -394,6 +366,22 @@ function calculateStreaks(days) {
   }
 
   return { current, longest };
+}
+
+function emptyDays() {
+  return dateRange(from, today).map((date) => ({ date: toDateKey(date), tokens: 0, active: false }));
+}
+
+function emptyTotals() {
+  return {
+    sessions: 0,
+    totalTokens: 0,
+    maxSessionTokens: 0,
+    longestSessionMinutes: 0,
+    currentStreak: 0,
+    longestStreak: 0,
+    toolCalls: 0
+  };
 }
 
 function dateRange(start, end) {

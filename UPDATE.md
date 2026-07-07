@@ -1,6 +1,6 @@
 # Profile update
 
-GitHub contribution activity updates automatically once a day through GitHub Actions.
+The SVG now shows Codex activity only. GitHub's own contribution graph already appears on the profile page, so it is not duplicated inside the SVG.
 
 Codex usage is local to this PC, so refresh it from this repository:
 
@@ -12,7 +12,6 @@ cd C:\Users\tjdwl\kimsj1686
 That command regenerates:
 
 - `data/codex-activity.json`
-- `data/github-contributions.json`
 - `assets/activity-profile.svg`
 
 It then commits and pushes the changed generated files.

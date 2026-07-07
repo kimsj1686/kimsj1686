@@ -18,12 +18,11 @@ jobs:
           node-version: "24"
       - run: npm run update:profile
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_LOGIN: kimsj1686
       - name: Commit generated profile assets
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/activity-profile.svg data/github-contributions.json
+          git add assets/activity-profile.svg
           git diff --cached --quiet || git commit -m "chore: update profile activity"
           git push

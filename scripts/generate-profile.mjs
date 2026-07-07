@@ -12,6 +12,7 @@ const svgPath = path.join(assetsDir, "activity-profile.svg");
 const login = process.env.GITHUB_LOGIN || "kimsj1686";
 const displayName = process.env.PROFILE_NAME || "sungjin";
 const codexHome = process.env.CODEX_HOME || path.join(os.homedir(), ".codex");
+const timezoneLabel = process.env.TZ || Intl.DateTimeFormat().resolvedOptions().timeZone || "local time";
 
 fs.mkdirSync(assetsDir, { recursive: true });
 fs.mkdirSync(dataDir, { recursive: true });
@@ -195,7 +196,7 @@ function renderSvg(codex) {
   const codexMax = Math.max(...codexDays.map((day) => day.value), 1);
   const topTools = codex.topTools?.length ? codex.topTools : [{ name: "No tool data yet", count: 0 }];
   const totals = codex.totals || emptyTotals();
-  const generatedAt = new Date(codex.generatedAt || new Date()).toISOString().slice(0, 10);
+  const generatedAt = toDateKey(new Date(codex.generatedAt || new Date()));
   const sourceLabel = codex.source?.includes("SQLite") ? "local Codex DB" : "local Codex sessions";
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -229,7 +230,7 @@ function renderSvg(codex) {
   <circle cx="560" cy="130" r="52" fill="#de72bd"/>
   <text x="560" y="148" text-anchor="middle" font-size="36" font-family="ui-sans-serif, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-weight="850" fill="#ffffff">SJ</text>
   <text x="560" y="214" text-anchor="middle" class="title">${escapeXml(displayName)}</text>
-  <text x="560" y="244" text-anchor="middle" class="meta">@${escapeXml(login)} · Codex activity · ${escapeXml(sourceLabel)}</text>
+  <text x="560" y="244" text-anchor="middle" class="meta">@${escapeXml(login)} · local Codex CLI activity · ${escapeXml(sourceLabel)}</text>
 
   ${renderStats([
     [formatCompact(totals.totalTokens || 0), "누적 토큰"],
@@ -239,8 +240,8 @@ function renderSvg(codex) {
     [`${totals.longestStreak || 0}일`, "최장 연속"]
   ])}
 
-  <text x="104" y="395" class="label">Codex 토큰 활동</text>
-  <text x="1016" y="395" text-anchor="end" class="small">최근 365일 · 마지막 갱신 ${escapeXml(generatedAt)}</text>
+  <text x="104" y="395" class="label">로컬 Codex 토큰 활동</text>
+  <text x="1016" y="395" text-anchor="end" class="small">최근 365일 · ${escapeXml(timezoneLabel)} · 갱신 ${escapeXml(generatedAt)}</text>
   ${renderHeatmap(codexDays, 104, 418, codexMax, ["#252627", "#213745", "#2f5b75", "#478bc2", "#8ccbff"])}
   ${renderMonthLabels(104, 580)}
 
@@ -403,7 +404,10 @@ function addDays(date, days) {
 }
 
 function toDateKey(date) {
-  return date.toISOString().slice(0, 10);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
 }
 
 function formatCompact(value) {

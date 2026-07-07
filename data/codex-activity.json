@@ -1,12 +1,7 @@
 {
-  "generatedAt": "2026-07-07T23:44:33.583Z",
+  "generatedAt": "2026-07-07T23:47:18.828Z",
   "source": "Codex local SQLite threads table",
   "days": [
-    {
-      "date": "2025-07-08",
-      "tokens": 0,
-      "active": false
-    },
     {
       "date": "2025-07-09",
       "tokens": 0,
@@ -1824,23 +1819,28 @@
     },
     {
       "date": "2026-07-07",
-      "tokens": 15084101,
+      "tokens": 11593136,
+      "active": true
+    },
+    {
+      "date": "2026-07-08",
+      "tokens": 4300738,
       "active": true
     }
   ],
   "totals": {
     "sessions": 7,
-    "totalTokens": 15084101,
+    "totalTokens": 15893874,
     "maxSessionTokens": 10902041,
     "longestSessionMinutes": 1030,
-    "currentStreak": 1,
-    "longestStreak": 1,
-    "toolCalls": 185
+    "currentStreak": 2,
+    "longestStreak": 2,
+    "toolCalls": 199
   },
   "topTools": [
     {
       "name": "shell-command",
-      "count": 183
+      "count": 197
     },
     {
       "name": "js",

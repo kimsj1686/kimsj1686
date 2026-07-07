@@ -1,0 +1,29 @@
+name: Update profile activity
+
+on:
+  schedule:
+    - cron: "12 18 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: npm run update:profile
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_LOGIN: kimsj1686
+      - name: Commit generated profile assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/activity-profile.svg data/github-contributions.json
+          git diff --cached --quiet || git commit -m "chore: update profile activity"
+          git push

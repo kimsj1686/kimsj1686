@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "update:profile": "node scripts/generate-profile.mjs"
+  }
+}

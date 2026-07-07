@@ -13,13 +13,6 @@ AI-assisted builder focused on shipping practical software, clean project docs, 
 
 </div>
 
-## About
-
-프로젝트를 문서, 구현, 검증까지 이어서 실제로 돌아가는 형태로 만드는 데 집중합니다.
-
-- 관심 영역: AI-assisted development, Flutter, Cloudflare Workers, Python, automation
-- 작업 방식: 요구사항 정리, 작은 단위 구현, 테스트/검증, 문서 동기화
-
 ## GitHub
 
 <div align="center">

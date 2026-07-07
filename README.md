@@ -19,13 +19,6 @@ AI-assisted builder focused on shipping practical software, clean project docs, 
 
 - 관심 영역: AI-assisted development, Flutter, Cloudflare Workers, Python, automation
 - 작업 방식: 요구사항 정리, 작은 단위 구현, 테스트/검증, 문서 동기화
-- 현재 공개 프로젝트: 딥러닝 기반 음식 이미지 탐지 비교 프로젝트
-
-## Featured
-
-| Project | Stack | Notes |
-| --- | --- | --- |
-| [DeepLeaning](https://github.com/kimsj1686/DeepLeaning) | Python | YOLO와 Faster R-CNN 기반 음식 이미지 탐지 비교 프로젝트 |
 
 ## GitHub
 

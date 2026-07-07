@@ -29,17 +29,3 @@ AI-assisted builder focused on shipping practical software, clean project docs, 
 ![Codex 사용 현황](assets/codex-activity.svg)
 
 </div>
-
-이 이미지는 로컬 Codex 인덱스의 `threads.tokens_used` 값을 기준으로 수동 생성합니다. 원본 대화 내용이나 인증 정보는 공개하지 않습니다.
-
-<details>
-<summary>수동 업데이트 명령</summary>
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\update-codex-activity.ps1
-git add README.md assets\codex-activity.svg scripts\update-codex-activity.ps1
-git commit -m "Update Codex activity"
-git push
-```
-
-</details>

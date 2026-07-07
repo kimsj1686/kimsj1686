@@ -261,7 +261,7 @@ $gap = 3
 $left = 205
 $top = 256
 $width = 1000
-$height = 390
+$height = 382
 $inactive = "#1a2230"
 $colors = @("#0e1117", "#17345f", "#225ea8", "#3b82f6", "#8bbcff")
 
@@ -270,18 +270,10 @@ $svg.Add("<svg xmlns=`"http://www.w3.org/2000/svg`" width=`"$width`" height=`"$h
 $svg.Add("  <title id=`"title`">Codex profile activity</title>")
 $svg.Add("  <desc id=`"desc`">Codex-style profile activity card generated from local token usage.</desc>")
 $svg.Add("  <defs>")
-$svg.Add("    <linearGradient id=`"shell`" x1=`"0`" y1=`"0`" x2=`"1`" y2=`"1`">")
-$svg.Add("      <stop offset=`"0%`" stop-color=`"#3b22d8`"/>")
-$svg.Add("      <stop offset=`"45%`" stop-color=`"#1d4ed8`"/>")
-$svg.Add("      <stop offset=`"100%`" stop-color=`"#7c3aed`"/>")
-$svg.Add("    </linearGradient>")
 $svg.Add("    <linearGradient id=`"avatar`" x1=`"0`" y1=`"0`" x2=`"1`" y2=`"1`">")
 $svg.Add("      <stop offset=`"0%`" stop-color=`"#60a5fa`"/>")
 $svg.Add("      <stop offset=`"100%`" stop-color=`"#a78bfa`"/>")
 $svg.Add("    </linearGradient>")
-$svg.Add("    <filter id=`"softShadow`" x=`"-20%`" y=`"-20%`" width=`"140%`" height=`"140%`">")
-$svg.Add("      <feDropShadow dx=`"0`" dy=`"16`" stdDeviation=`"18`" flood-color=`"#000000`" flood-opacity=`"0.35`"/>")
-$svg.Add("    </filter>")
 $svg.Add("  </defs>")
 $svg.Add("  <style>")
 $svg.Add("    .ui { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif; }")
@@ -295,11 +287,10 @@ $svg.Add("    .activeTab { fill: #dbeafe; }")
 $svg.Add("    .month { font: 500 10px Inter, ui-sans-serif, system-ui, sans-serif; fill: #586274; }")
 $svg.Add("    .day { shape-rendering: geometricPrecision; }")
 $svg.Add("  </style>")
-$svg.Add("  <rect width=`"100%`" height=`"100%`" rx=`"18`" fill=`"url(#shell)`"/>")
-$svg.Add("  <rect x=`"54`" y=`"34`" width=`"892`" height=`"322`" rx=`"12`" fill=`"#0b0d0f`" stroke=`"#243044`" stroke-width=`"1`" filter=`"url(#softShadow)`"/>")
-$svg.Add("  <text class=`"small ui`" x=`"78`" y=`"61`">Profile</text>")
-$svg.Add("  <text class=`"small ui`" x=`"834`" y=`"61`">Private</text>")
-$svg.Add("  <text class=`"small ui`" x=`"896`" y=`"61`">Edit</text>")
+$svg.Add("  <rect width=`"100%`" height=`"100%`" fill=`"#0b0d0f`"/>")
+$svg.Add("  <text class=`"small ui`" x=`"28`" y=`"31`">Profile</text>")
+$svg.Add("  <text class=`"small ui`" x=`"852`" y=`"31`">Private</text>")
+$svg.Add("  <text class=`"small ui`" x=`"914`" y=`"31`">Edit</text>")
 $svg.Add("  <circle cx=`"500`" cy=`"83`" r=`"25`" fill=`"url(#avatar)`"/>")
 $svg.Add("  <text class=`"title ui`" x=`"500`" y=`"131`" text-anchor=`"middle`">kimsj1686</text>")
 $svg.Add("  <text class=`"small ui`" x=`"500`" y=`"151`" text-anchor=`"middle`">@kimsj1686 - Codex</text>")
